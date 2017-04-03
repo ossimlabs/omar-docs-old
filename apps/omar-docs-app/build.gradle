@@ -7,7 +7,7 @@ import com.bmuschko.gradle.docker.tasks.image.DockerRemoveImage
 buildscript {
   ext {
     grailsVersion = ""
-    baseImage = "centos"
+    baseImage = "o2-base"
     if(System.env.OMAR_COMMON_PROPERTIES)
     {
       apply from: System.env.OMAR_COMMON_PROPERTIES
@@ -38,13 +38,15 @@ task createDockerfile(type: Dockerfile, overwrite:true){
   from "${project.dockerNamespaceUrl}${project.ext.baseImage}:${project.dockerAppTag}"
   maintainer "DigitalGlobe-RadiantBlue"
   copyFile "docs.conf", "/etc/httpd/conf.d/docs.conf"
-
   runCommand "yum -y install httpd mod_ssl wget curl&& yum clean all"
+  workingDir "/var/www/html"
+  copyFile "run-httpd.sh", "/run-httpd.sh"
+  exposePort 80, 443
+  defaultCommand "/run-httpd.sh"
 }
 
 task buildDockerImage(type: DockerBuildImage, overwrite:true) {
   dependsOn createDockerfile
-  dependsOn logIn 
   inputDir = createDockerfile.destFile.parentFile
   tag = "${image}"
 }
@@ -55,7 +57,7 @@ task tagDockerImage(type: DockerTagImage, dependsOn: buildDockerImage, overwrite
 }
 
 task pushDockerImage(type: DockerPushImage, overwrite:true){
-
+  dependsOn logIn 
   dependsOn tagDockerImage
   
   imageName "${dockerNamespaceUrl}${image}"
