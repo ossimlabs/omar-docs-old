@@ -42,7 +42,7 @@ node(""){
      }
       stage ("Publish Docker App")
       {
-        sh "mv install.tgz omar-docs/apps/omar-docs-app/docker"
+        sh "mv install.tgz omar-docs/apps/omar-docs-app/docker/"
         withCredentials([[$class: 'UsernamePasswordMultiBinding',
                         credentialsId: 'dockerCredentials',
                         usernameVariable: 'OPENSHIFT_USERNAME',
