@@ -42,7 +42,7 @@ task createDockerfile(type: Dockerfile, overwrite:true){
   copyFile "install.tgz", "/var/www/html/"
   copyFile "run-httpd.sh", "/run-httpd.sh"
   workingDir "/var/www/html"
-  runCommand "tar -xfz install.tgz"
+  runCommand "tar xfz install.tgz"
   runCommand "mv ./install/share/o2/docs/* ."
   runCommand "rm -rf install install.tgz"
   exposePort 80, 443
