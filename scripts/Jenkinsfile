@@ -17,23 +17,23 @@ node(""){
     env.OMAR_COMMON_PROPERTIES="${workspaceDir}/${omarCommonProjName}/omar-common-properties.gradle"
 
     stage("Checkout"){
-        dir("ossim-ci") {
-            git branch: "${OSSIM_GIT_BRANCH}", url: "https://github.com/ossimlabs/ossim-ci.git"
-        }
+        //dir("ossim-ci") {
+        //    git branch: "${OSSIM_GIT_BRANCH}", url: "https://github.com/ossimlabs/ossim-ci.git"
+        //}
         dir(appName) {
             git branch: "${OSSIM_GIT_BRANCH}", url: "https://github.com/ossimlabs/${appName}.git"
         }
 
-        dir(omarCommonProjName) {
-            git branch: "${OSSIM_GIT_BRANCH}", url: "https://github.com/ossimlabs/${omarCommonProjName}.git"
-        }
+        //dir(omarCommonProjName) {
+        //    git branch: "${OSSIM_GIT_BRANCH}", url: "https://github.com/ossimlabs/${omarCommonProjName}.git"
+        //}
 
         notifyObj = load "${workspaceDir}/ossim-ci/jenkins/pipeline/notify.groovy"
     }
 
     try {
      stage("Download Artifacts"){
-         dir("${env.WORKSPACE}"){
+         dir("${env.WORKSPACE}"/omar-docs){
             sh "ls -lR"
             sh "./mkdocs"
          }
