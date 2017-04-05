@@ -34,11 +34,7 @@ node(""){
     try {
      stage("Download Artifacts"){
          dir("${env.WORKSPACE}"){
-             step ([$class: 'CopyArtifact',
-                projectName: "build-docs-${OSSIM_GIT_BRANCH}",
-                filter: "install.tgz",
-                flatten: true])
-            sh "mv install.tgz ./omar-docs/apps/omar-docs-app/docker/"
+            sh "./mkdocs.sh"
          }
      }
       stage ("Publish Docker App")
