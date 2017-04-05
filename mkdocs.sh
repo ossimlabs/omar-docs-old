@@ -9,7 +9,5 @@ source $SCRIPT_DIR/env.sh
 
 source $SCRIPT_DIR/checkout.sh
 source $SCRIPT_DIR/yml.sh
-ls -lR
-cat mkdocs.yml
 
 mkdocs build
