@@ -17,9 +17,9 @@ node(""){
     env.OMAR_COMMON_PROPERTIES="${workspaceDir}/${omarCommonProjName}/omar-common-properties.gradle"
 
     stage("Checkout"){
-        //dir("ossim-ci") {
-        //    git branch: "${OSSIM_GIT_BRANCH}", url: "https://github.com/ossimlabs/ossim-ci.git"
-        //}
+        dir("ossim-ci") {
+            git branch: "${OSSIM_GIT_BRANCH}", url: "https://github.com/ossimlabs/ossim-ci.git"
+        }
         dir(appName) {
             git branch: "${OSSIM_GIT_BRANCH}", url: "https://github.com/ossimlabs/${appName}.git"
         }
