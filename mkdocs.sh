@@ -12,7 +12,3 @@ source $SCRIPT_DIR/yml.sh
 
 
 mkdocs build
-
-tar cvfz docs.tgz site
-
-ls -Rl

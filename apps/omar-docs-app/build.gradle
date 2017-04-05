@@ -39,9 +39,12 @@ task createDockerfile(type: Dockerfile, overwrite:true){
   maintainer "DigitalGlobe-RadiantBlue"
   copyFile "docs.conf", "/etc/httpd/conf.d/docs.conf"
   runCommand "yum -y install httpd mod_ssl wget curl&& yum clean all"
-  copyFile "site/*", "/var/www/html/"
   copyFile "docs.tgz", "/var/www/html/"
   copyFile "run-httpd.sh", "/run-httpd.sh"
+  workingDir "/var/www/html"
+  runCommand "tar xfz docs.tgz"
+  runCommand "mv ./site/* ."
+  runCommand "rm -rf site docs.tgz"
   runCommand "chmod -v +x /run-httpd.sh"
   exposePort 80, 443
   defaultCommand "/run-httpd.sh"
