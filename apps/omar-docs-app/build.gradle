@@ -39,13 +39,9 @@ task createDockerfile(type: Dockerfile, overwrite:true){
   maintainer "DigitalGlobe-RadiantBlue"
   copyFile "docs.conf", "/etc/httpd/conf.d/docs.conf"
   runCommand "yum -y install httpd mod_ssl wget curl&& yum clean all"
-  copyFile "install.tgz", "/var/www/html/"
+  copyFile "site/*", "/var/www/html/"
   copyFile "run-httpd.sh", "/run-httpd.sh"
   runCommand "chmod -v +x /run-httpd.sh"
-  workingDir "/var/www/html"
-  runCommand "tar xfz install.tgz"
-  runCommand "mv ./install/share/o2/docs/* ."
-  runCommand "rm -rf install install.tgz"
   exposePort 80, 443
   defaultCommand "/run-httpd.sh"
 }
@@ -62,9 +58,9 @@ task tagDockerImage(type: DockerTagImage, dependsOn: buildDockerImage, overwrite
 }
 
 task pushDockerImage(type: DockerPushImage, overwrite:true){
-  dependsOn logIn 
+  dependsOn logIn
   dependsOn tagDockerImage
-  
+
   imageName "${dockerNamespaceUrl}${image}"
 }
 
