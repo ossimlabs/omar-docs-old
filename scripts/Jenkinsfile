@@ -34,9 +34,11 @@ node(""){
     try {
      stage("Download Artifacts"){
          dir("${env.WORKSPACE}/omar-docs"){
-            sh "./mkdocs.sh"
-            sh "mv site ${workspaceDir}/${appName}/apps/${appName}-app/docker"
-            sh "mv docs.tgz ${workspaceDir}/${appName}/apps/${appName}-app/docker"
+            sh """
+                ./mkdocs.sh
+                tar cvfz docs.tgz site
+                mv docs.tgz ${workspaceDir}/${appName}/apps/${appName}-app/docker
+            """
          }
      }
       stage ("Publish Docker App")
