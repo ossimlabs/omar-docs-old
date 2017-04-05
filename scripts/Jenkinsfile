@@ -34,7 +34,8 @@ node(""){
     try {
      stage("Download Artifacts"){
          dir("${env.WORKSPACE}"){
-            sh "./mkdocs.sh"
+            sh "ls -lR"
+            sh "./mkdocs"
          }
      }
       stage ("Publish Docker App")
