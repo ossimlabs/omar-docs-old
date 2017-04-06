@@ -28,3 +28,9 @@ export APPS=(
 	"three-disa"
 	"tlv"
 )
+
+export GUIDES=(
+    "build-guide"
+	"install-guide"
+    "user-guide"
+)
