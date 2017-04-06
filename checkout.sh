@@ -17,7 +17,7 @@ for app in ${APPS[@]} ; do
 		pushd $app
 
 		# only checkout the folder containing the documentation
-		echo "Checking out documentation..."
+		echo "Checking out documentation for $app..."
 		git init
 		git remote add -f origin git://github.com/ossimlabs/$app.git
 		git config core.sparsecheckout true
@@ -26,7 +26,7 @@ for app in ${APPS[@]} ; do
  		pushd $app
 	fi
 
-	git pull --depth 1 --quiet origin dev
+	git pull --depth 1 origin dev
 
 	popd
 done
