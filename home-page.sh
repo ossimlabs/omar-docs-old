@@ -13,7 +13,7 @@ for app in ${APPS[@]} ; do
 
         GUIDE=$app/docs/$guide/$app.md
         if [ -e $SCRIPT_DIR/docs/$GUIDE ]; then
-            echo -n "[$guide]($app/docs/$guide/$app) " >> index.md
+            echo -n "[$guide]($app/docs/$guide/$app/) " >> index.md
         fi
     done
 

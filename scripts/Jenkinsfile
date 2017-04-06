@@ -35,6 +35,7 @@ node(""){
      stage("Download Artifacts"){
          dir("${env.WORKSPACE}/omar-docs"){
             sh """
+                echo $OSSIM_GIT_BRANCH
                 ./mkdocs.sh
                 tar cvfz docs.tgz site
                 mv docs.tgz ${workspaceDir}/${appName}/apps/${appName}-app/docker
