@@ -16,6 +16,6 @@ This file will cycle through all the apps, building a "guides" table. If a parti
 
 ## yml.sh
 This file will cycle through all the apps, incorporating any of the following files into the overall documentation `mkdocs.yml`.
-* docs/build-guide/<app>.md
-* docs/install-guide/<app>.md
-* docs/user-guide/<app>.md
+* `docs/build-guide/<app>.md`
+* `docs/install-guide/<app>.md`
+* `docs/user-guide/<app>.md`
