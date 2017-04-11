@@ -76,8 +76,19 @@ task saveDockerImage(dependsOn: pushDockerImage, overwrite:true) {
   }
 }
 
+task pushSiteContentsToS3 {
+    exec {
+        commandLine 'echo "aws s3 sync stie s3://ossimlabs/${ project.name }-${ System.getenv( "OSSIM_GIT_BRANCH" )"'
+    }
+    exec {
+        commandLine "aws", "s3", "sync", "stie", "s3://ossimlabs/${ project.name }-${ System.getenv( 'OSSIM_GIT_BRANCH' ) }"
+    }
+}
+
 // Uses the S3 plugin to push the .tgz file to the ossimlabs
 task dockerImageToS3(type: com.github.skhatri.s3aws.plugin.S3UploadTask, dependsOn: saveDockerImage, overwrite:true) {
+  dependsOn pushSiteContentsToS3
+
   bucket = 'o2-delivery/dev/docker'
   key = "${imageTgz}"
   file = project.file("${imageTgz}").toString()

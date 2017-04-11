@@ -56,31 +56,6 @@ node(""){
                 """
             }
         }
-
-        stage( "Publish to S3" ) {
-           dir( "${ env.WORKSPACE }/omar-docs" ) {
-               step([$class: 'S3BucketPublisher',
-                    dontWaitForConcurrentBuildCompletion: false,
-                    entries: [[
-                        bucket: "ossimlabs/${ appName }-${ OSSIM_GIT_BRANCH }",
-                        excludedFile: '',
-                        flatten: false,
-                        gzipFiles: false,
-                        keepForever: false,
-                        managedArtifacts: false,
-                        noUploadOnFailure: false,
-                        selectedRegion: 'us-east-1',
-                        showDirectlyInBrowser: true,
-                        sourceFile: "site/*",
-                        storageClass: 'STANDARD',
-                        uploadFromSlave: false,
-                        useServerSideEncryption: false
-                    ]],
-                    profileName: 'o2-cicd',
-                    userMetadata: []
-                ])
-            }
-        }
     }
     catch( e ) {
         echo e.toString()
