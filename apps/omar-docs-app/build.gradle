@@ -78,7 +78,7 @@ task saveDockerImage(dependsOn: pushDockerImage, overwrite:true) {
 
 task pushSiteContentsToS3 {
     exec {
-        commandLine 'echo "aws s3 sync stie s3://ossimlabs/${ project.name }-${ System.getenv( "OSSIM_GIT_BRANCH" )"'
+        commandLine "echo", "aws s3 sync stie s3://ossimlabs/${ project.name }-${ System.getenv( "OSSIM_GIT_BRANCH" )"
     }
     exec {
         commandLine "aws", "s3", "sync", "stie", "s3://ossimlabs/${ project.name }-${ System.getenv( 'OSSIM_GIT_BRANCH' ) }"
