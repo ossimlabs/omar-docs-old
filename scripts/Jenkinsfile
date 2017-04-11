@@ -14,56 +14,80 @@ node(""){
     def workspaceDir = pwd()
     def appName = "omar-docs"
     def omarCommonProjName = "omar-common"
-    env.OMAR_COMMON_PROPERTIES="${workspaceDir}/${omarCommonProjName}/omar-common-properties.gradle"
+    env.OMAR_COMMON_PROPERTIES = "${ workspaceDir }/${ omarCommonProjName }/omar-common-properties.gradle"
 
-    stage("Checkout"){
-        dir("ossim-ci") {
-            git branch: "${OSSIM_GIT_BRANCH}", url: "https://github.com/ossimlabs/ossim-ci.git"
+    stage( "Checkout" ){
+        dir( "ossim-ci" ) {
+            git branch: "${ OSSIM_GIT_BRANCH }", url: "https://github.com/ossimlabs/ossim-ci.git"
         }
-        dir(appName) {
-            git branch: "${OSSIM_GIT_BRANCH}", url: "https://github.com/ossimlabs/${appName}.git"
-        }
-
-        dir(omarCommonProjName) {
-            git branch: "${OSSIM_GIT_BRANCH}", url: "https://github.com/ossimlabs/${omarCommonProjName}.git"
+        dir( appName ) {
+            git branch: "${ OSSIM_GIT_BRANCH }", url: "https://github.com/ossimlabs/${ appName }.git"
         }
 
-        notifyObj = load "${workspaceDir}/ossim-ci/jenkins/pipeline/notify.groovy"
+        dir( omarCommonProjName ) {
+            git branch: "${ OSSIM_GIT_BRANCH }", url: "https://github.com/ossimlabs/${ omarCommonProjName }.git"
+        }
+
+        notifyObj = load "${ workspaceDir }/ossim-ci/jenkins/pipeline/notify.groovy"
     }
 
     try {
-     stage("Download Artifacts"){
-         dir("${env.WORKSPACE}/omar-docs"){
-            sh """
-                echo $OSSIM_GIT_BRANCH
-                ./mkdocs.sh
-                tar cvfz docs.tgz site
-                mv docs.tgz ${workspaceDir}/${appName}/apps/${appName}-app/docker
-            """
-         }
-     }
-      stage ("Publish Docker App")
-      {
-        withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                        credentialsId: 'dockerCredentials',
-                        usernameVariable: 'OPENSHIFT_USERNAME',
-                        passwordVariable: 'OPENSHIFT_PASSWORD']])
-        {
-            // Run all tasks on the app. This includes pushing to OpenShift and S3.
-            sh """
-            pushd ${workspaceDir}/${appName}/apps/${appName}-app
-            ./gradlew ${GRADLE_TASK}
-            popd
-            """
+        stage( "Download Artifacts" ) {
+            dir( "${ env.WORKSPACE }/omar-docs" ) {
+                sh """
+                    echo $OSSIM_GIT_BRANCH
+                    ./mkdocs.sh
+                    tar cvfz docs.tgz site
+                    mv docs.tgz ${ workspaceDir }/${ appName }/apps/${ appName }-app/docker
+                """
+            }
         }
-      }
+        stage ( "Publish Docker App" ) {
+            withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                credentialsId: 'dockerCredentials',
+                usernameVariable: 'OPENSHIFT_USERNAME',
+                passwordVariable: 'OPENSHIFT_PASSWORD']]) {
+
+                // Run all tasks on the app. This includes pushing to OpenShift and S3.
+                sh """
+                    pushd ${ workspaceDir }/${ appName }/apps/${ appName }-app
+                    ./gradlew ${GRADLE_TASK}
+                    popd
+                """
+            }
+        }
+
+        stage( "Publish to S3" ) {
+           dir( "${ env.WORKSPACE }/omar-docs" ) {
+               step([$class: 'S3BucketPublisher',
+                    dontWaitForConcurrentBuildCompletion: false,
+                    entries: [[
+                        bucket: "ossimlabs/${ OSSIM_GIT_BRANCH }",
+                        excludedFile: '',
+                        flatten: false,
+                        gzipFiles: false,
+                        keepForever: false,
+                        managedArtifacts: false,
+                        noUploadOnFailure: false,
+                        selectedRegion: 'us-east-1',
+                        showDirectlyInBrowser: true,
+                        sourceFile: "site/*",
+                        storageClass: 'STANDARD',
+                        uploadFromSlave: false,
+                        useServerSideEncryption: false
+                    ]],
+                    profileName: 'o2-cicd',
+                    userMetadata: []
+                ])
+            }
+        }
     }
-    catch(e){
+    catch( e ) {
         echo e.toString()
         currentBuild.result = "FAILED"
         notifyObj?.notifyFailed()
     }
-  stage("Clean Workspace"){
-     step([$class: 'WsCleanup'])
-  }
+    stage( "Clean Workspace" ){
+        step([$class: 'WsCleanup'])
+    }
 }
