@@ -83,9 +83,9 @@ task pushSiteContentsToS3 {
 }
 
 task pushDocsToS3(type: com.github.skhatri.s3aws.plugin.S3UploadTask, overwrite: true) {
-    exec {
-        commandLine "aws", "s3", "sync", "../../site", "s3://ossimlabs/omar-docs-${ System.getenv( 'OSSIM_GIT_BRANCH' ) }"
-    }
+    //exec {
+    //    commandLine "aws", "s3", "sync", "../../site", "s3://ossimlabs/omar-docs-${ System.getenv( 'OSSIM_GIT_BRANCH' ) }"
+    //}
 
     bucket = "o2-delivery/dev/o2-install-guide"
     key = "docs.tgz"
