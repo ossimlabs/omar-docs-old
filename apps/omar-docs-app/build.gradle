@@ -83,10 +83,9 @@ task pushSiteContentsToS3 {
 }
 
 task pushDocsToS3(type: com.github.skhatri.s3aws.plugin.S3UploadTask, overwrite: true) {
-
-    bucket = "o2-delivery/dev/o2-install-guide"
-    key = "docs.tgz"
-    file = "../../docs.tgz"
+    exec {
+        commandLine "aws", "cp", "../../docs.tgz", "s3://ossimlabs/o2-delivery/dev/o2-install-guide/docs.tgz }"
+    }
 }
 
 // Uses the S3 plugin to push the .tgz file to the ossimlabs
