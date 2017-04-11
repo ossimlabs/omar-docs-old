@@ -38,7 +38,7 @@ node(""){
                     echo $OSSIM_GIT_BRANCH
                     ./mkdocs.sh
                     tar cvfz docs.tgz site
-                    mv docs.tgz ${ workspaceDir }/${ appName }/apps/${ appName }-app/docker
+                    cp docs.tgz ${ workspaceDir }/${ appName }/apps/${ appName }-app/docker
                 """
             }
         }
