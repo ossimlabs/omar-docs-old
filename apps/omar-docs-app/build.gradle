@@ -79,10 +79,10 @@ task saveDockerImage(dependsOn: pushDockerImage, overwrite:true) {
 task pushSiteContentsToS3 {
     doLast {
         exec {
-            commandLine "echo", "aws s3 sync ${ System.getenv( "env.WORKSPACE" ) }/omar-docs/site s3://ossimlabs/omar-docs-${ System.getenv( "OSSIM_GIT_BRANCH" ) }"
+            commandLine "echo", "aws s3 sync ../../site s3://ossimlabs/omar-docs-${ System.getenv( "OSSIM_GIT_BRANCH" ) }"
         }
         exec {
-            commandLine "aws", "s3", "sync", "${ System.getenv( "env.WORKSPACE" ) }/omar-docs/site", "s3://ossimlabs/omar-docs-${ System.getenv( 'OSSIM_GIT_BRANCH' ) }"
+            commandLine "aws", "s3", "sync", "../../site", "s3://ossimlabs/omar-docs-${ System.getenv( 'OSSIM_GIT_BRANCH' ) }"
         }
     }
 }
