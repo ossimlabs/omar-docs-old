@@ -6,7 +6,7 @@ pushd docs
 for app in ${APPS[@]} ; do
 
 	# start from scratch if the user passes the "clean" argument
-	if [ $1 = "clean" ]; then
+	if [ "$1" = "clean" ]; then
 		rm -rf $app
 	fi
 
