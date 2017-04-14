@@ -1,6 +1,7 @@
 #! /bin/bash
 
 export APPS=(
+	"omar-common"
 	"omar-avro"
 	"omar-core"
 	"omar-geoscript"
