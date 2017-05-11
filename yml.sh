@@ -1,6 +1,6 @@
 #! /bin/bash
 
-echo "site_name: OMAR Web Services" > mkdocs.yml
+echo "site_name: O2 Web Services" > mkdocs.yml
 echo "pages:" >> mkdocs.yml
 echo "- Home: index.md" >> mkdocs.yml
 
