@@ -6,7 +6,6 @@ export APPS=(
 	"omar-geoscript"
 	"omar-disk-cleanup"
 	"omar-download"
-	"omar-ingest-metrics"
 	"omar-jpip"
 	"omar-mensa"
 	"omar-opir"
@@ -19,7 +18,6 @@ export APPS=(
 	"omar-wfs"
 	"omar-wms"
 	"omar-wmts"
-	"omar-video"
 	"tlv"
 )
 
