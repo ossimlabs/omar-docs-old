@@ -6,6 +6,7 @@ export APPS=(
 	"omar-geoscript"
 	"omar-disk-cleanup"
 	"omar-download"
+	"omar-eureka-server"
 	"omar-jpip"
 	"omar-mensa"
 	"omar-opir"
@@ -13,11 +14,13 @@ export APPS=(
 	"omar-sqs"
 	"omar-stager"
 	"omar-superoverlay"
+	"omar-turbine-server"
 	"omar-ui"
 	"omar-wcs"
 	"omar-wfs"
 	"omar-wms"
 	"omar-wmts"
+	"omar-zuul-server"
 	"tlv"
 )
 
