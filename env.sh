@@ -3,6 +3,7 @@
 export APPS=(
 	"omar-avro"
 	"omar-base"
+	"omar-config-server"
 	"omar-geoscript"
 	"omar-disk-cleanup"
 	"omar-download"
