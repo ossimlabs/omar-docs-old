@@ -11,6 +11,7 @@ export APPS=(
 	"omar-jpip"
 	"omar-mensa"
 	"omar-opir"
+	"omar-ossim-base"
 	"omar-service-proxy"
 	"omar-sqs"
 	"omar-stager"
