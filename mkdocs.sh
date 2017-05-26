@@ -12,4 +12,4 @@ source $SCRIPT_DIR/home-page.sh
 source $SCRIPT_DIR/versioning.sh
 source $SCRIPT_DIR/yml.sh
 
-#mkdocs build
+mkdocs build
