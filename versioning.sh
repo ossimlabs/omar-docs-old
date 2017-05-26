@@ -28,7 +28,7 @@ for app in ${APPS[@]} ; do
 
         # only modify the guide if it exists
         if [ -e $SCRIPT_DIR/docs/$GUIDE ]; then
-            sed -i "2i$VERSION" GUIDE
+            sed -i "2i$VERSION" $GUIDE
         fi
     done
 
