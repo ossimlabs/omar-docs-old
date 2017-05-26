@@ -1,5 +1,7 @@
 #! /bin/bash
 
+pushd docs
+
 ARTIFACTORY_URL="http://artifacts.radiantbluecloud.com/artifactory/omar-local/io/ossim/omar/apps"
 
 for app in ${APPS[@]} ; do
@@ -26,10 +28,12 @@ for app in ${APPS[@]} ; do
     for guide in ${GUIDES[@]} ; do
         GUIDE=$app/docs/$guide/$app.md
 
-        # only modify the guide if it exists
-        if [ -e $SCRIPT_DIR/docs/$GUIDE ]; then
+        # only modify the guide if it exists and the version number exists
+        if [ -e $SCRIPT_DIR/docs/$GUIDE && "$VERSION" -ne "" ]; then
             sed -i "2i$VERSION" $GUIDE
         fi
     done
 
 done
+
+popd
