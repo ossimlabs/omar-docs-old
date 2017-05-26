@@ -20,7 +20,7 @@ for app in ${APPS[@]} ; do
 
             def buildNumber = xml.versioning.snapshot.buildNumber;
             def timeStamp = xml.versioning.snapshot.timestamp;
-            println timeStamp.toString() + '-' + buildNumber.toString()
+            println 'Version: ' + timeStamp.toString() + '-' + buildNumber.toString()
         }
         catch ( Exception e ) { println '' }
     ")
