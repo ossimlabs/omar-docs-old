@@ -16,6 +16,7 @@ for repo in ${REPOS[@]} ; do
 
         GUIDE=$app/docs/$guide/$app.md
         if [ -e $SCRIPT_DIR/docs/$GUIDE ]; then
+            echo "Found $GUIDE"
             echo -n "[$guide]($app/docs/$guide/$app/) " >> index.md
         fi
     done
