@@ -5,7 +5,10 @@ pushd docs
 echo "| App | Guides |   |   |" >> index.md
 echo "| --- | ------ | - | - |" >> index.md
 
-for app in ${APPS[@]} ; do
+for repo in ${REPOS[@]} ; do
+
+    app=`echo $repo | sed -n 's/.*[/]\(.*\).git$/\1/p'`
+
     echo -n "| $app " >> index.md
 
     for guide in ${GUIDES[@]} ; do
