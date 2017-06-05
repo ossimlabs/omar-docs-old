@@ -4,12 +4,22 @@ pushd docs
 
 ARTIFACTORY_URL="http://artifacts.radiantbluecloud.com/artifactory/omar-local/io/ossim/omar/apps"
 
-for app in ${APPS[@]} ; do
+for repo in ${REPOS[@]} ; do
 
-    if [[ $app == *"server"* ]]; then
-        URL="$ARTIFACTORY_URL/$app/1.0.0-SNAPSHOT/maven-metadata.xml"
+    app=`echo $repo | sed -n 's/.*[/]\(.*\).git$/\1/p'`
+
+    # determine if a RELEASE or SNAPSHOT should be used
+    if [ "$OSSIM_GIT_BRANCH" == "master" ]; then
+        RELEASE="1.0.0-RELEASE"
     else
-        URL="$ARTIFACTORY_URL/$app-app/1.0.0-SNAPSHOT/maven-metadata.xml"
+        RELEASE="1.0.0-SNAPSHOT"
+    fi
+
+    # the apps with server don't need the "app" extension
+    if [[ $app == *"server"* ]]; then
+        URL="$ARTIFACTORY_URL/$app/$RELEASE/maven-metadata.xml"
+    else
+        URL="$ARTIFACTORY_URL/$app-app/$RELEASE/maven-metadata.xml"
     fi
 
     VERSION=$( groovy -e "

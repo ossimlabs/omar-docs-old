@@ -7,7 +7,10 @@ echo "- Home: index.md" >> mkdocs.yml
 for guide in ${GUIDES[@]} ; do
     FLAG=false
 
-    for app in ${APPS[@]} ; do
+    for repo in ${REPOS[@]} ; do
+
+        app=`echo $repo | sed -n 's/.*[/]\(.*\).git$/\1/p'`
+
         # if the app has the correct guide documentation, add it to the yml
         GUIDE=$app/docs/$guide/$app.md
         if [ -e $SCRIPT_DIR/docs/$GUIDE ]; then

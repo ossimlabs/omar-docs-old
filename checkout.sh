@@ -3,7 +3,9 @@
 # mkdocs requires a docs directory in which to place all relavent markup files
 pushd docs
 
-for app in ${APPS[@]} ; do
+for repo in ${REPOS[@]} ; do
+
+	app=`echo $repo | sed -n 's/.*[/]\(.*\).git$/\1/p'`
 
 	# start from scratch if the user passes the "clean" argument
 	if [ "$1" = "clean" ]; then
@@ -19,7 +21,7 @@ for app in ${APPS[@]} ; do
 		# only checkout the folder containing the documentation
 		echo "Checking out documentation for $app..."
 		git init
-		git remote add -f origin git://github.com/ossimlabs/$app.git
+		git remote add -f origin git://$repo
 		git config core.sparsecheckout true
 		echo "docs" > .git/info/sparse-checkout
 	else
