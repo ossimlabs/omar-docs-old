@@ -21,7 +21,7 @@ for repo in ${REPOS[@]} ; do
 		# only checkout the folder containing the documentation
 		echo "Checking out documentation for $app..."
 		git init
-		git remote add -f origin git://$repo
+		git remote add -f origin git://$GIT_USERNAME:$GITPASSWORD@$repo
 		git config core.sparsecheckout true
 		echo "docs" > .git/info/sparse-checkout
 	else

@@ -33,13 +33,19 @@ node(""){
 
     try {
         stage( "Download Artifacts" ) {
-            dir( "${ env.WORKSPACE }/omar-docs" ) {
-                sh """
-                    echo $OSSIM_GIT_BRANCH
-                    ./mkdocs.sh
-                    tar cvfz docs.tgz site
-                    cp docs.tgz ${ workspaceDir }/${ appName }/apps/${ appName }-app/docker
-                """
+            withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                credentialsId: 'cicdGithub',
+                usernameVariable: 'GIT_USERNAME',
+                passwordVariable: 'GIT_PASSWORD']]) {
+
+                dir( "${ env.WORKSPACE }/omar-docs" ) {
+                    sh """
+                        echo $OSSIM_GIT_BRANCH
+                        ./mkdocs.sh
+                        tar cvfz docs.tgz site
+                        cp docs.tgz ${ workspaceDir }/${ appName }/apps/${ appName }-app/docker
+                    """
+                }
             }
         }
         stage ( "Publish Docker App" ) {
