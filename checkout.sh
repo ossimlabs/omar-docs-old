@@ -23,6 +23,7 @@ for repo in ${REPOS[@]} ; do
 		git clone https://$GIT_USERNAME:$GIT_PASSWORD@$repo
 		#git init
 		#git remote add -f origin https://$GIT_USERNAME:$GIT_PASSWORD@$repo
+		rm -rf $app/apps
 		#git config core.sparsecheckout true
 		#echo "docs" > .git/info/sparse-checkout
 	#else
