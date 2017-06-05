@@ -34,7 +34,7 @@ node(""){
     try {
         stage( "Download Artifacts" ) {
             withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                credentialsId: 'cicdGithub',
+                credentialsId: 'ossimlabs-minion',
                 usernameVariable: 'GIT_USERNAME',
                 passwordVariable: 'GIT_PASSWORD']]) {
 
