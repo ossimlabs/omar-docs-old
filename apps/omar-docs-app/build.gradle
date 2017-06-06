@@ -39,7 +39,7 @@ task createDockerfile(type: Dockerfile, overwrite:true){
   maintainer "DigitalGlobe-RadiantBlue"
   copyFile "docs.conf", "/etc/httpd/conf.d/docs.conf"
   copyFile "rhel-deps.repo", "/etc/yum.repos.d/rhel-deps.repo"
-  runCommand "yum -y install httpd mod_ssl wget curl&& yum clean all"
+  runCommand "yum -y install hostname httpd mod_ssl wget curl&& yum clean all"
   copyFile "docs.tgz", "/var/www/html/"
   copyFile "run-httpd.sh", "/run-httpd.sh"
   workingDir "/var/www/html"
