@@ -40,7 +40,7 @@ task createDockerfile(type: Dockerfile, overwrite:true){
   copyFile "docs.conf", "/etc/httpd/conf.d/docs.conf"
   runCommand "yum -y install httpd mod_ssl wget curl&& yum clean all"
   copyFile "docs.tgz", "/var/www/html/"
-  copyFile "rhel-deps.repo /etc/yum.repos.d/rhel-deps.repo"
+  copyFile "rhel-deps.repo, /etc/yum.repos.d/rhel-deps.repo"
   copyFile "run-httpd.sh", "/run-httpd.sh"
   workingDir "/var/www/html"
   runCommand "tar xfz docs.tgz"
