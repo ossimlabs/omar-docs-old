@@ -21,6 +21,7 @@ for repo in ${REPOS[@]} ; do
     else
         URL="$ARTIFACTORY_URL/$app-app/$RELEASE/maven-metadata.xml"
     fi
+    echo "Checking for Version in: $URL"
 
     VERSION=$( groovy -e "
         try {
