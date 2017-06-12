@@ -29,7 +29,7 @@ for repo in ${REPOS[@]} ; do
  		pushd $app
 	fi
 
-	git pull --depth 1 origin dev
+	git pull origin dev
 
 	popd
 done
