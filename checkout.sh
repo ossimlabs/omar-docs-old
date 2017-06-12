@@ -13,26 +13,25 @@ for repo in ${REPOS[@]} ; do
 	fi
 
 	# if a directory does not exist for the app, create one
-	#if [ ! -d "$app" ]; then
-		#echo "Creating $app docs directory..."
-  		#mkdir $app
-		#pushd $app
+	if [ ! -d "$app" ]; then
+		echo "Creating $app docs directory..."
+  		mkdir $app
+		pushd $app
 
 		# only checkout the folder containing the documentation
 		echo "Checking out documentation for $app..."
-		git clone https://$GIT_USERNAME:$GIT_PASSWORD@$repo
-		#git init
-		#git remote add -f origin https://$GIT_USERNAME:$GIT_PASSWORD@$repo
+		git init
+		git remote add -f origin https://$GIT_USERNAME:$GIT_PASSWORD@$repo
 		rm -rf $app/apps
-		#git config core.sparsecheckout true
-		#echo "docs" > .git/info/sparse-checkout
-	#else
- 	#	pushd $app
-	#fi
+		git config core.sparsecheckout true
+		echo "docs" > .git/info/sparse-checkout
+	else
+ 		pushd $app
+	fi
 
-	#git pull --depth 1 origin dev
+	git pull --depth 1 origin dev
 
-	#popd
+	popd
 done
 
 popd
