@@ -7,6 +7,7 @@ export GUIDES=(
 )
 
 export REPOS=(
+	"github.com/ossimlabs/omar-common.git"
 	"github.com/radiantbluetechnologies/isa.git"
 	"github.com/ossimlabs/omar-avro.git"
 	"github.com/ossimlabs/omar-base.git"
