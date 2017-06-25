@@ -18,7 +18,7 @@ for repo in ${REPOS[@]} ; do
 
         # only modify the guide if it exists and the version number exists
         if [ -e $SCRIPT_DIR/docs/$GUIDE ] && [ "$VERSION" != "" ]; then
-            sed -i "2i$VERSION" $GUIDE
+            sed -i "2iv$VERSION" $GUIDE
         fi
     done
 
