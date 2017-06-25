@@ -8,7 +8,7 @@ for repo in ${REPOS[@]} ; do
 
     app=`echo $repo | sed -n 's/.*[/]\(.*\).git$/\1/p'`
 
-    for x in `find ../ -name gradle.properties`; do
+    for x in `find ../apps -name gradle.properties`; do
         VERSION=`grep buildVersion $x | awk -F "=" '{print $2}'`
     done
 
