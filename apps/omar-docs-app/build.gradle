@@ -24,6 +24,7 @@ buildscript {
 
           "MAINTAINER DigitalGlobe-RadiantBlue",
           """LABEL com.digitalglobe.version="" """,
+          "ENV HOME=/usr/share/omar",
           "USER root",
           """RUN mkdir -p \$HOME && \
                  yum --disablerepo=centos* -y install hostname httpd gettext && \
