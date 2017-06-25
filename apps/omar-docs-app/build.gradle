@@ -26,6 +26,7 @@ buildscript {
           """LABEL com.digitalglobe.version="" """,
           "ENV HOME=/usr/share/omar",
           "USER root",
+          "COPY rhel-deps.repo /etc/yum.repos.d/rhel-deps.repo",
           """RUN mkdir -p \$HOME && \
                  yum --disablerepo=centos* -y install hostname httpd gettext && \
                  yum -y install nss_wrapper mod_ssl && yum clean all && \
@@ -36,7 +37,6 @@ buildscript {
                       setcap cap_net_bind_service+ep /usr/sbin/apachectl""",
           "COPY docs.conf /etc/httpd/conf.d/docs.conf",
           "COPY docs.tgz /var/www/html/",
-          "COPY rhel-deps.repo /etc/yum.repos.d/rhel-deps.repo",
           "WORKDIR  /var/www/html",
           "RUN tar xfz docs.tgz && \
                mv ./site/* . &&\
