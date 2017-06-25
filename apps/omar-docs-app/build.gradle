@@ -1,37 +1,11 @@
-import com.bmuschko.gradle.docker.tasks.image.Dockerfile
-import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
-import com.bmuschko.gradle.docker.tasks.image.DockerTagImage
-import com.bmuschko.gradle.docker.tasks.image.DockerPushImage
-import com.bmuschko.gradle.docker.tasks.image.DockerRemoveImage
 
 buildscript {
   ext {
     grailsVersion = ""
+    hasJar={false}
     baseImage = "omar-base"
-    if(System.env.OMAR_COMMON_PROPERTIES)
-    {
-      apply from: System.env.OMAR_COMMON_PROPERTIES
-    }
-  }
-  repositories {
-    mavenLocal()
-    maven { url "${ossimMavenProxy}" }
-  }
-  dependencies {
-        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:latest.release"
-  }
-}
-apply plugin: "eclipse"
-apply plugin: "idea"
-apply plugin: "java"
-apply plugin: "maven-publish"
-
-task createDockerfile(type: Dockerfile, overwrite:true){
-  destFile = project.file('docker/Dockerfile')
-
-  from "${project.dockerNamespaceUrl}${project.ext.baseImage}:${project.dockerAppTag}"
-  maintainer "DigitalGlobe-RadiantBlue"
-  copyFile "docs.conf", "/etc/httpd/conf.d/docs.conf"
+    dockerFile="docker/Dockerfile"
+/*  copyFile "docs.conf", "/etc/httpd/conf.d/docs.conf"
   copyFile "rhel-deps.repo", "/etc/yum.repos.d/rhel-deps.repo"
   runCommand "yum -y install hostname httpd mod_ssl wget curl&& yum clean all"
   copyFile "docs.tgz", "/var/www/html/"
@@ -43,64 +17,96 @@ task createDockerfile(type: Dockerfile, overwrite:true){
   runCommand "chmod -v +x /run-httpd.sh"
   exposePort 80, 443
   defaultCommand "/run-httpd.sh"
+*/
+    dockerStatementsOverride = {
+       [
+          "FROM ${project.dockerNamespaceUrl}${project.ext.baseImage}:${project.dockerAppTag}",
+
+          "MAINTAINER DigitalGlobe-RadiantBlue",
+          """LABEL com.digitalglobe.version="" """,
+          "USER root",
+          """RUN mkdir -p \$HOME && \
+                 yum --disablerepo=centos* -y install hostname httpd gettext && \
+                 yum -y install nss_wrapper mod_ssl && yum clean all && \
+                 useradd -u 1001 -r -g 0 -d \$HOME -s /sbin/nologin \
+                      -c "Default Application User" omar && \
+                      sed '/^omar/d' /etc/passwd >\$HOME/passwd-template && \
+                      setcap cap_net_bind_service+ep /usr/sbin/httpd && \
+                      setcap cap_net_bind_service+ep /usr/sbin/apachectl""",
+          "COPY docs.conf /etc/httpd/conf.d/docs.conf",
+          "COPY docs.tgz /var/www/html/",
+          "WORKDIR  /var/www/html",
+          "RUN tar xfz docs.tgz && \
+               mv ./site/* . &&\
+               rm -rf site docs.tgz"
+          "ADD run-httpd.sh \$HOME/run-httpd.sh",
+          """RUN chmod -v +x \$HOME/run-httpd.sh && \
+              chmod 770 /usr/share/httpd && \
+              chmod 770 /var/run/httpd && \
+              chown 1001:0 /run/httpd && \
+              chown 1001:0 /var/log/httpd && \
+              chmod 770 /var/log/httpd && \
+              chmod g+s /var/run/httpd && \
+              find /usr/share/httpd -type d -exec chmod g+xws {} \\; && \
+              find /usr/share/httpd -type f -exec chmod g+rw {} \\; && \
+              find /etc/httpd -type d -exec chmod g+rw {} \\; && \
+              find /etc/pki -type d -exec chmod g+xws {} \\; && \
+              find /etc/pki -type f -exec chmod g+rw {} \\; && \
+              chown -R 1001:0 /usr/share/httpd && \
+              chown -R 1001:0 /etc/httpd && \
+              chown -R 1001:0 /etc/pki && \
+              find \$HOME -type d -exec chmod g+xws {} \\; && \
+              find \$HOME -type f -exec chmod g+rw {} \\; && \
+              chown -R 1001:0 \$HOME && \
+              chmod 770 \$HOME/*.sh && \
+              chown -R 1001:0 \$HOME""",
+          "VOLUME /dev/random /home",
+          "EXPOSE 80 443",
+          "WORKDIR \$HOME",
+          "USER 1001",
+          "CMD ./run-httpd.sh"
+
+       ]
+     }
+  }
+  if(System.env.OMAR_COMMON_PROPERTIES)
+  {
+    apply from: System.env.OMAR_COMMON_PROPERTIES
+  }
+  repositories {
+    mavenLocal()
+    maven { url "${ossimMavenProxy}" }
+  }
+  dependencies {
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:latest.release"
+  }
+}
+apply plugin: "java"
+apply plugin: "maven-publish"
+apply plugin: "maven"
+
+group "io.ossim.omar.apps"
+
+
+repositories {
+  mavenLocal()
+  maven { url "${ossimMavenProxy}" }
+  mavenCentral()
 }
 
-task buildDockerImage(type: DockerBuildImage, overwrite:true) {
-  dependsOn createDockerfile
-  inputDir = createDockerfile.destFile.parentFile
-  tag = "${image}"
-}
-task tagDockerImage(type: DockerTagImage, dependsOn: buildDockerImage, overwrite:true) {
-  imageId "${image}"
-  tag "${dockerAppTag}"
-  repository  "${dockerNamespaceUrl}${project.name}"
+dependencies {
+  compile 'org.codehaus.groovy:groovy-all:2.4.7'
+  compile 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1'
+  compile 'org.postgresql:postgresql:9.4-1205-jdbc42'
 }
 
-task pushDockerImage(type: DockerPushImage, overwrite:true){
-  dependsOn logIn
-  dependsOn tagDockerImage
 
-  imageName "${dockerNamespaceUrl}${image}"
-}
-
-task saveDockerImage(dependsOn: pushDockerImage, overwrite:true) {
-  doLast {
-    exec {
-      commandLine 'docker', 'save', image, '-o', "${project.name}.tgz"
+publishing {
+  publications {
+    mavenJava(MavenPublication) {
+      from components.java
     }
   }
 }
 
-task pushDocsToS3(type: com.github.skhatri.s3aws.plugin.S3UploadTask, overwrite: true) {
-    exec {
-        commandLine "aws", "s3", "sync", "../../site", "s3://ossimlabs/omar-docs-${ System.getenv( 'OSSIM_GIT_BRANCH' ) }"
-    }
 
-    bucket = "o2-delivery/dev/o2-install-guide"
-    key = "docs.tgz"
-    file = "../../docs.tgz"
-}
-
-// Uses the S3 plugin to push the .tgz file to the ossimlabs
-task dockerImageToS3(type: com.github.skhatri.s3aws.plugin.S3UploadTask, dependsOn: saveDockerImage, overwrite:true) {
-  dependsOn pushDocsToS3
-
-  bucket = 'o2-delivery/dev/docker'
-  key = "${imageTgz}"
-  file = project.file("${imageTgz}").toString()
-}
-
-task doAll(dependsOn: dockerImageToS3, overwrite:true) {
-  doLast{
-    exec {
-      // Removes the image that is pushed to the remote repository
-      // from the local Docker registry
-      commandLine 'docker', 'rmi', "-f", "${dockerNamespaceUrl}${image}"
-    }
-    exec {
-      // Removes the default image created during the build process from
-      // from the local Docker registry
-      commandLine 'docker', 'rmi', "-f", image
-    }
-  }
-}
