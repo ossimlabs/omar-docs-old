@@ -5,19 +5,6 @@ buildscript {
     hasJar={false}
     baseImage = "omar-base"
     dockerFile="docker/Dockerfile"
-/*  copyFile "docs.conf", "/etc/httpd/conf.d/docs.conf"
-  copyFile "rhel-deps.repo", "/etc/yum.repos.d/rhel-deps.repo"
-  runCommand "yum -y install hostname httpd mod_ssl wget curl&& yum clean all"
-  copyFile "docs.tgz", "/var/www/html/"
-  copyFile "run-httpd.sh", "/run-httpd.sh"
-  workingDir "/var/www/html"
-  runCommand "tar xfz docs.tgz"
-  runCommand "mv ./site/* ."
-  runCommand "rm -rf site docs.tgz"
-  runCommand "chmod -v +x /run-httpd.sh"
-  exposePort 80, 443
-  defaultCommand "/run-httpd.sh"
-*/
     dockerStatementsOverride = {
        [
           "FROM ${project.dockerNamespaceUrl}${project.ext.baseImage}:${project.dockerAppTag}",
