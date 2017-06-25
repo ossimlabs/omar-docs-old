@@ -38,7 +38,7 @@ buildscript {
           "WORKDIR  /var/www/html",
           "RUN tar xfz docs.tgz && \
                mv ./site/* . &&\
-               rm -rf site docs.tgz"
+               rm -rf site docs.tgz",
           "ADD run-httpd.sh \$HOME/run-httpd.sh",
           """RUN chmod -v +x \$HOME/run-httpd.sh && \
               chmod 770 /usr/share/httpd && \
