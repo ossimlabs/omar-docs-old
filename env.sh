@@ -1,7 +1,6 @@
 #! /bin/bash
 
 export GUIDES=(
-    "build-guide"
     "install-guide"
     "user-guide"
 )
