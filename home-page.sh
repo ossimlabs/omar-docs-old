@@ -2,9 +2,6 @@
 
 pushd docs
 
-#echo "| App |   |   |" >> index.md
-#echo "| --- | - | - |" >> index.md
-
 for repo in ${REPOS[@]} ; do
 
     app=`echo $repo | sed -n 's/.*[/]\(.*\).git$/\1/p'`

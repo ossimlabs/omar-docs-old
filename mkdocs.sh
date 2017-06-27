@@ -14,4 +14,5 @@ source $SCRIPT_DIR/yml.sh
 
 mkdocs build
 
-find . -type f -exec sed -i 's/v\sDaytona\sBeach/Daytona Beach/g' {} +
+grep -r "vDaytona Beach" .
+find . -type f -exec sed -i 's/vDaytona Beach/Daytona Beach/g' {} +
