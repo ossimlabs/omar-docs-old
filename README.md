@@ -19,6 +19,5 @@ This file will look for a gradle.properties file in the repo. If there is a buil
 
 ## yml.sh
 This file will cycle through all the apps, incorporating any of the following files into the overall documentation `mkdocs.yml`.
-* `docs/build-guide/<app>.md`
 * `docs/install-guide/<app>.md`
 * `docs/user-guide/<app>.md`
