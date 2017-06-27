@@ -13,3 +13,5 @@ source $SCRIPT_DIR/versioning.sh
 source $SCRIPT_DIR/yml.sh
 
 mkdocs build
+
+find . -type f -exec sed -i 's/v Daytona Beach/Daytona Beach/g' {} +
