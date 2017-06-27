@@ -3,7 +3,7 @@
 echo "site_name: O2 Web Services" > mkdocs.yml
 echo "theme: windmill" >> mkdocs.yml
 echo "extra:" >> mkdocs.yml
-echo "  version: 2.0.0 Daytona Beach" >> mkdocs.yml
+echo "  version: Daytona Beach" >> mkdocs.yml
 echo "pages:" >> mkdocs.yml
 echo "- Home: index.md" >> mkdocs.yml
 
