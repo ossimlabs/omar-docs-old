@@ -4,10 +4,13 @@
 
 pushd docs
 
+echo "| | | | |" >> index.md
+echo "|-|-|-|-|" >> index.md
+
 for repo in ${REPOS[@]} ; do
 
     app=`echo $repo | sed -n 's/.*[/]\(.*\).git$/\1/p'`
-    
+
     getRepoVersion REPO_VERSION $app
 
     echo -n "| $app " >> index.md
