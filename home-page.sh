@@ -12,11 +12,11 @@ for repo in ${REPOS[@]} ; do
 
     echo -n "| $app " >> index.md
 
-#    if [! -z $VERSION ] ; then
-#        echo -n "| v${VERSION} " >> index.md
-#    else
-#        echo -n "| " >> index.md
-#    fi
+    if [ ! -z $VERSION ] ; then
+        echo -n "| v${VERSION} " >> index.md
+    else
+       echo -n "| " >> index.md
+    fi
 
     for guide in ${GUIDES[@]} ; do
         echo -n "| " >> index.md
