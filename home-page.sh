@@ -7,20 +7,20 @@ pushd docs
 for repo in ${REPOS[@]} ; do
 
     app=`echo $repo | sed -n 's/.*[/]\(.*\).git$/\1/p'`
+    
     getRepoVersion REPO_VERSION $app
 
 
     echo -n "| $app " >> index.md
 
-    if [ "$VERSION" != "" ] ; then
-        echo -n "| v${VERSION} " >> index.md
+    if [ "$REPO_VERSION" != "" ] ; then
+        echo -n "| v${REPO_VERSION} " >> index.md
     else
        echo -n "| " >> index.md
     fi
 
     for guide in ${GUIDES[@]} ; do
         echo -n "| " >> index.md
-
         GUIDE=$app/docs/$guide/$app.md
         if [ -e $SCRIPT_DIR/docs/$GUIDE ]; then
             echo "Found $GUIDE"
