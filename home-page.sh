@@ -10,7 +10,7 @@ for repo in ${REPOS[@]} ; do
     
     getRepoVersion REPO_VERSION $app
 
-
+echo "*************** REPO_VERSION === ${REPO_VERSION}"
     echo -n "| $app " >> index.md
 
     if [ "$REPO_VERSION" != "" ] ; then
