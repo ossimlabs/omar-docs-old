@@ -12,7 +12,7 @@ for repo in ${REPOS[@]} ; do
 
     echo -n "| $app " >> index.md
 
-    if [ ! -z $VERSION ] ; then
+    if [ "$VERSION" != "" ] ; then
         echo -n "| v${VERSION} " >> index.md
     else
        echo -n "| " >> index.md
