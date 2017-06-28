@@ -15,4 +15,4 @@ source $SCRIPT_DIR/yml.sh
 mkdocs build
 
 # for aesthetics
-find . -type f -exec sed -i 's/vDaytona Beach/Daytona Beach/g' {} +
+find . -type f -exec sed -i 's/vDaytona Beach/Daytona Beach 2.0.0/g' {} +
