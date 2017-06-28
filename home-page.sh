@@ -1,12 +1,17 @@
 #! /bin/bash
 
+. functions.sh
+
 pushd docs
 
 for repo in ${REPOS[@]} ; do
 
     app=`echo $repo | sed -n 's/.*[/]\(.*\).git$/\1/p'`
+    getRepoVersion VERSION $app
 
+    echo "VERSION ==== ${VERSION}"
     echo -n "| $app " >> index.md
+    echo -n "| v${VERSION} " >> index.md
 
     for guide in ${GUIDES[@]} ; do
         echo -n "| " >> index.md
