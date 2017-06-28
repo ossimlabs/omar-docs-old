@@ -4,7 +4,8 @@
 
 pushd docs
 
-echo "| | | |" >> index.md
+echo "| | | | |" >> index.md
+echo "|-|-|-|-|" >> index.md
 
 for repo in ${REPOS[@]} ; do
 
