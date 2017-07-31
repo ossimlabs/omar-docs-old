@@ -12,4 +12,7 @@ source $SCRIPT_DIR/home-page.sh
 source $SCRIPT_DIR/versioning.sh
 source $SCRIPT_DIR/yml.sh
 
+# remove any existing stylesheets
+find . -name "*.css" -type f -delete
+
 mkdocs build
