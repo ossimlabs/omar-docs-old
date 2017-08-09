@@ -11,7 +11,7 @@ buildscript {
 
           "MAINTAINER DigitalGlobe-RadiantBlue",
           """LABEL com.digitalglobe.version="" """,
-          "ENV HOME=/usr/share/omar",
+          "ENV HOME=/home/omar",
           "USER root",
           "COPY rhel-deps.repo /etc/yum.repos.d/rhel-deps.repo",
           """RUN mkdir -p \$HOME && \
