@@ -17,9 +17,7 @@ buildscript {
           """RUN mkdir -p \$HOME && \
                  yum --disablerepo=centos* -y install hostname httpd gettext && \
                  yum -y install nss_wrapper mod_ssl && yum clean all && \
-                 useradd -u 1001 -r -g 0 -d \$HOME -s /sbin/nologin \
-                      -c "Default Application User" omar && \
-                      sed '/^omar/d' /etc/passwd >\$HOME/passwd-template && \
+                 sed '/^omar/d' /etc/passwd >\$HOME/passwd-template && \
                       setcap cap_net_bind_service+ep /usr/sbin/httpd && \
                       setcap cap_net_bind_service+ep /usr/sbin/apachectl""",
           "COPY docs.conf /etc/httpd/conf.d/docs.conf",
