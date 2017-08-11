@@ -1,19 +1,23 @@
 $( document ).ready( function() {
-    var url = location.origin;
-
     $( "tbody tr" ).each(
         function( index, row ) {
             var column = $( row ).children()[ 0 ];
             var app = $( column ).html();
 
+            var url = "/" + app + "/api";
             $.ajax({
                 complete: function( xhr, textStatus ) {
+
+                    var swaggerColumn = $( row ).children()[ 4 ];
                     if ( xhr.status == 200 ) {
-                        var a = "<a href = '../" + app + "/api' target = '_blank'>API</a>";
-                        $( $( row ).children()[ 4 ] ).html( a );
+                        var a = "<a href = '" + url + "' target = '_blank'>API</a>";
+                        $( swaggerColumn ).html( a );
+                    }
+                    else {
+                        $( swaggerColumn ).html( "" );
                     }
                 },
-                url: url + "/" + app + "/api"
+                url: url
             });
         }
     );
