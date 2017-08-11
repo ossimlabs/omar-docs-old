@@ -9,6 +9,7 @@ export REPOS=(
 	"github.com/ossimlabs/omar-common.git"
 	"github.com/radiantbluetechnologies/isa.git"
 	"github.com/ossimlabs/omar-avro.git"
+	"github.com/ossimlabs/omar-avro-metadata.git"
 	"github.com/ossimlabs/omar-base.git"
 	"github.com/ossimlabs/omar-config-server.git"
 	"github.com/ossimlabs/omar-geoscript.git"
