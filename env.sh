@@ -31,5 +31,6 @@ export REPOS=(
 	"github.com/ossimlabs/omar-wms.git"
 	"github.com/ossimlabs/omar-wmts.git"
 	"github.com/ossimlabs/omar-zuul-server.git"
+	"github.com/ossimlabs/rhel-minimal.git"
 	"github.com/ossimlabs/tlv.git"
 )
