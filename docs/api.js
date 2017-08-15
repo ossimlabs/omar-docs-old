@@ -4,7 +4,7 @@ $( document ).ready( function() {
             var column = $( row ).children()[ 0 ];
             var app = $( column ).html();
 
-            var url = "/" + app + "/api#!/" + app.split("-")[ 1 ];
+            var url = "/" + app + "/api";
             $.ajax({
                 complete: function( xhr, textStatus ) {
 
