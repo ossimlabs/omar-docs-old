@@ -18,14 +18,15 @@ buildscript {
             yum --disablerepo=centos* -y install hostname httpd gettext && \
             yum -y install nss_wrapper mod_ssl && yum clean all && \
             sed '/^omar/d' /etc/passwd >\$HOME/passwd-template && \
-            setcap cap_net_bind_service+ep /usr/sbin/httpd"""
+            setcap cap_net_bind_service+ep /usr/sbin/httpd && \
+            setcap cap_net_bind_service+ep /usr/sbin/apachectl"""
 
 ]}
 
 
     //
     //
-    //        setcap cap_net_bind_service+ep /usr/sbin/apachectl""",
+    //
     //      "COPY docs.conf /etc/httpd/conf.d/docs.conf",
     //      "COPY docs.tgz /var/www/html/",
     //      "WORKDIR  /var/www/html",
