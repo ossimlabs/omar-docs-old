@@ -12,7 +12,8 @@ buildscript {
         "USER root",
         "COPY rhel-deps.repo /etc/yum.repos.d/rhel-deps.repo",
         """RUN mkdir -p \$HOME && \
-            yum --disablerepo=centos* -y install hostname httpd gettext""",
+            yum --disablerepo=centos* -y install hostname httpd gettext && \,
+            yum -y install mod_ssl && yum clean all""",
         "COPY docs.conf /etc/httpd/conf.d/docs.conf",
         "COPY docs.tgz /var/www/html/",
         "WORKDIR  /var/www/html",
