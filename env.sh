@@ -18,6 +18,7 @@ export REPOS=(
 	"github.com/ossimlabs/omar-eureka-server.git"
 	"github.com/ossimlabs/omar-jpip.git"
 	"github.com/ossimlabs/omar-mensa.git"
+	"github.com/ossimlabs/omar-oms.git"
 	"github.com/ossimlabs/omar-opir.git"
 	"github.com/ossimlabs/omar-ossim-base.git"
 	"github.com/ossimlabs/omar-service-proxy.git"
