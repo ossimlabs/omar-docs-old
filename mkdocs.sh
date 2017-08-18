@@ -9,6 +9,7 @@ source $SCRIPT_DIR/env.sh
 
 source $SCRIPT_DIR/checkout.sh
 source $SCRIPT_DIR/home-page.sh
+source $SCRIPT_DIR/config.sh
 source $SCRIPT_DIR/versioning.sh
 source $SCRIPT_DIR/yml.sh
 

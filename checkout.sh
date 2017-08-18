@@ -25,6 +25,7 @@ for repo in ${REPOS[@]} ; do
 		rm -rf $app/apps
 		git config core.sparsecheckout true
 		echo "apps/$app-app/gradle.properties" >> .git/info/sparse-checkout
+		echo "apps/$app-app/grails-app/conf/application.yml" >> .git/info/sparse-checkout
 		echo "docs" >> .git/info/sparse-checkout
 		echo "gradle.properties" >> .git/info/sparse-checkout
 	else
