@@ -26,6 +26,7 @@ export REPOS=(
 	"github.com/ossimlabs/omar-stager.git"
 	"github.com/ossimlabs/omar-superoverlay.git"
 	"github.com/ossimlabs/omar-turbine-server.git"
+	"github.com/ossimlabs/omar-twofishes.git"
 	"github.com/ossimlabs/omar-ui.git"
 	"github.com/ossimlabs/omar-wcs.git"
 	"github.com/ossimlabs/omar-wfs.git"
