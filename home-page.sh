@@ -4,8 +4,8 @@
 
 pushd docs
 
-echo "| | | | |" >> index.md
-echo "|-|-|-|-|" >> index.md
+echo "| | | | | |" >> index.md
+echo "|-|-|-|-|-|" >> index.md
 
 for repo in ${REPOS[@]} ; do
 
@@ -29,6 +29,9 @@ for repo in ${REPOS[@]} ; do
             echo -n "[$guide]($app/docs/$guide/$app/) " >> index.md
         fi
     done
+
+    echo -n "| ... " >> index.md
+
 
     echo " |" >> index.md
 done
