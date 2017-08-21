@@ -11,6 +11,9 @@ This file contains a list of all the apps and guides that will be included in th
 ## checkout.sh
 This file will cycle through all apps, checking out the docs folder from each repository. If the app folder already exists any updates to the repository will be pulled.
 
+## config.sh
+This file will pull the grails-app/conf/application.yml file and paste it into the configuration section of the install-guide.
+
 ## home-page.sh
 This file will cycle through all the apps, building a "guides" table. If a particular guide is present for an app, a link will be provided, otherwise it will be left blank.
 
