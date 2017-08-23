@@ -74,5 +74,9 @@ The following bugs have been resolved:
 
 * The OpenShift integration environment on unclassified AWS was having resource utilization issues. OpenShift stack upgraded to 1.5.1.
 
+## The following new repositories have been added to teh OMAR service baseline
 
-## Guides
+* ossim-rpm
+* ossim-rpm-dependencies
+* isa-ui (changed from isa)
+* omar-database
