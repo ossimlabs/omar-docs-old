@@ -15,12 +15,11 @@ In no particular order, here are the major new and updated features provided in 
 **Native S3**
 * Added Step definitions for Direct S3 access
 * Added Gherkin for the scenarios
-* Added the target to the staging part of the S3 direct access	Actions
-
+* Added the target to the staging part of the S3 direct access
 * In o2-paas we added the securityContext to allow privileged user and added the setup SYS_ADMIN and runAsUser 1001 to force a 1001 startup to each container we need privileged user for. This includes OMS, WCS, DOWNLOAD, MENSA. and STAGER. We also added a BUCKETS env variable to allow one to specify the bucks to mount.
 * On the OpenShift cluster we must run on master "oc edit scc restricted" to enable pods: to come up as privileged, allow SYS_ADMIN to be set and to RunAsAny user.
 * Only the pipelines we are currently using have been modified to support mounting the s3 on startup. On our distribution we modified omar-oms, omar-download, omar-stager, and omar-mensa. We added a run.sh that checks for the environment variable BUCKETS and mount the buckets to a /s3 directory
-* We added a pipeline ossim-goofys that takes the goofys master branch and builds the binary and uploads it to the bucket location ossimlabs/dependencies/goofys/goofys. The Docker SPEC for the build pipelines mentioned uses a wget to install the goofys onto the /usr/bin directory.	Actions
+* We added a pipeline ossim-goofys that takes the goofys master branch and builds the binary and uploads it to the bucket location ossimlabs/dependencies/goofys/goofys. The Docker SPEC for the build pipelines mentioned uses a wget to install the goofys onto the /usr/bin directory.
 
 **OC2S Environment**
 * Added to the PKI confluence All certificates and how to convert them to a PEM
@@ -31,12 +30,12 @@ In no particular order, here are the major new and updated features provided in 
 **One-way Guard**
 * SMTP Notifier Github repo created
 * SMTP Notifier Jenkins pipelines created for master and dev
-* SMTP Notifier Code is complete with the ability to configure the SMTP settings, 'From' email address, and email signature	Actions
+* SMTP Notifier Code is complete with the ability to configure the SMTP settings, 'From' email address, and email signature
 
 **PKI Authorization**
 * Modified the PKI proxy image on high side to include the Certificate Revocation List setup for all CRL posted on the high side
 * Updated the Jenkins pipeline to automatically update the revocation list
-* Updated the Confluence for PKI configuration to describe the Jenkins steps being executed by the omar-update-crl pipeline	Actions
+* Updated the Confluence for PKI configuration to describe the Jenkins steps being executed by the omar-update-crl pipeline
 
 **OSSIM Mensuration**
 * OSSIM now supports wild point filtering
