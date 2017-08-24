@@ -17,3 +17,5 @@ source $SCRIPT_DIR/yml.sh
 find . -name "*.css" -type f -delete
 
 mkdocs build
+
+sed -i -e 's/content="None"/content="Complete installation and user guides for the suite of O2 services."/g' $SCRIPT_DIR/site/index.html
