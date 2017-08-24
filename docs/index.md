@@ -80,3 +80,5 @@ The following bugs have been resolved:
 * ossim-rpm-dependencies
 * isa-ui (changed from isa)
 * omar-database
+
+## Guides
