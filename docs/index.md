@@ -5,14 +5,17 @@ These docs serve as a guide for installing and running an individual service. It
 ## Release Notes
 
 ### Features
+
 In no particular order, here are the major new and updated features provided in this release.
 
 **TLV**
+
 * The TLV API support searchLibraries=<lib1,lib2> as a way to automatically select multiple search libraries.
 * The search dialog will present a checkbox for each library that is available to search in.
 * WFS queries will now be client-side, using the user's credentials
 
 **Native S3**
+
 * Added Step definitions for Direct S3 access
 * Added Gherkin for the scenarios
 * Added the target to the staging part of the S3 direct access
@@ -22,25 +25,30 @@ In no particular order, here are the major new and updated features provided in 
 * We added a pipeline ossim-goofys that takes the goofys master branch and builds the binary and uploads it to the bucket location ossimlabs/dependencies/goofys/goofys. The Docker SPEC for the build pipelines mentioned uses a wget to install the goofys onto the /usr/bin directory.
 
 **OC2S Environment**
+
 * Added to the PKI confluence All certificates and how to convert them to a PEM
 * Currently only dev has been tested. we modified the location of the PKI CERTs to be it's own directory /etc/ssl/omar-certs.
 * Modified our unclass PKI to use the /etc/ssl/omar-certs directory
 * We now use the config mapping on the high side to replace the certs at deploy time
 
 **One-way Guard**
+
 * SMTP Notifier Github repo created
 * SMTP Notifier Jenkins pipelines created for master and dev
 * SMTP Notifier Code is complete with the ability to configure the SMTP settings, 'From' email address, and email signature
 
 **PKI Authorization**
+
 * Modified the PKI proxy image on high side to include the Certificate Revocation List setup for all CRL posted on the high side
 * Updated the Jenkins pipeline to automatically update the revocation list
 * Updated the Confluence for PKI configuration to describe the Jenkins steps being executed by the omar-update-crl pipeline
 
 **OSSIM Mensuration**
+
 * OSSIM now supports wild point filtering
 
 **Basemap**
+
 * Updated the reverese-proxy.conf files for omar-dev, and omar-rel on the unclassified cluster to use the new o2-mapproxy route
 * Updated the reverese-proxy.conf files for c2s-dev on the classified cluster to use the new o2-mapproxy route
 * Removed service-proxy route from the reverse-proxy.conf files for omar-dev, and omar-rel on unclassified cluster
@@ -50,25 +58,31 @@ In no particular order, here are the major new and updated features provided in 
 * Removed service-proxy from deployment template
 
 **EFK Logging**
+
 * Web proxy and pki proxy now log to standard out
 
 **Automated Testing**
+
 * Added TLV scenarios of automated UI testing.
 * Separated tests into backend, frontend, and ingest tests.
 * Created separate Jenkins pipelines for dev and master of each test type.
 * Tests now run periodically and after a related project builds (backend tests run after omar-wfs, etc, are built)
 
 **Placename (Twofishes)**
+
 * Added a Jenkins build pipeline for twofishes app so that its build and deployment is automated.
 
 **Image Ingest**
+
 * scdf image dumper - Added call to OSSIM JNI DataInfo object to get image info for each image staged.
 
 **OMAR UI**
+
 * Modified the geoscript and ui configs for OCS Dev define and use the highside color scheme for footprints.
 * Added a new profile for geoscript oc2s dev until we are able to update the stage env.
 
 ### Bugs
+
 The following bugs have been resolved:
 
 * The OpenShift integration environment on unclassified AWS was having resource utilization issues. OpenShift stack upgraded to 1.5.1.
