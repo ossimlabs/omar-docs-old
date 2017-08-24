@@ -3,7 +3,7 @@
 
 pushd docs
 
-ARTIFACTORY_URL="http://artifacts.radiantbluecloud.com/artifactory/omar-local/io/ossim/omar/apps"
+ARTIFACTORY_URL="http://artifactory.ossim.io/artifactory/omar-local/io/ossim/omar/apps"
 
 for repo in ${REPOS[@]} ; do
     VERSION=""
