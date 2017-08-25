@@ -29,7 +29,7 @@ export REPOS=(
 	"github.com/ossimlabs/omar-scdf-extractor.git"
 	"github.com/ossimlabs/omar-scdf-aggregator.git"
 	"github.com/ossimlabs/omar-scdf-file-parser.git"
-	"github.com/ossimlabs/omar-scdf-email-notifier.git"	
+	"github.com/ossimlabs/omar-scdf-notifier-email.git"	
 	"github.com/ossimlabs/omar-scdf-kafka.git"
 	"github.com/ossimlabs/omar-scdf-server.git"		
 	"github.com/ossimlabs/omar-scdf-zookeeper.git"		
