@@ -42,7 +42,7 @@ export REPOS=(
 	"github.com/ossimlabs/omar-twofishes.git"
 	"github.com/ossimlabs/omar-ui.git"
 	"github.com/ossimlabs/omar-wcs.git"
-	"github.com/radiantbluetechnologies/omar-web-proxy.git"
+	"github.com/ossimlabs/omar-web-proxy.git"
 	"github.com/ossimlabs/omar-wfs.git"
 	"github.com/ossimlabs/omar-wms.git"
 	"github.com/ossimlabs/omar-wmts.git"
