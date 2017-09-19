@@ -13,7 +13,7 @@ In no particular order, here are the major new and updated features provided in 
 * Added select/dropdown box above the image card list in the UI
 * The new dropdown can be used to change the OMAR backing services to a federated O2
 * The search map updates the footprint layer to match the currently selected OMAR
-* The search list cards update, and contain imagery from the currently selected OMAR 
+* The search list cards update, and contain imagery from the currently selected OMAR
 * The Imagespace map will load the image from the currently selected OMAR
 * Ancillary services such as KML SuperOverlay, Download, Mensa also use the currently selected OMAR
 * All TLV requests from the O2 UI will post to the TLV app installed with the currently selected OMAR
@@ -30,13 +30,16 @@ In no particular order, here are the major new and updated features provided in 
 * The banner can be disabled via application.yml param
 
 **OMAR Mensa**
+
 * Removed GeoScript from omar-mensa
 * omar-mensa now has a direct JTS dependency
 
 **OMAR Config Server**
+
 * OMAR config server now has two profiles: native and remote. The config server can serve files located in the service's local file system at ${HOME}/configs/ (/home/omar/configs/)
 
 **OMAR Web Proxy**
+
 * removed the CERT definitions out of GIT
 * Edited the docker configuration to remove the CERTS and to make sure we have directories for the different configurations.
 * Added config map definitions on the omar-dev so that the reverse proxy and CERT's and CRL can be defined on startup for that container.
@@ -46,14 +49,17 @@ In no particular order, here are the major new and updated features provided in 
 * Added support for CRL config maps to /etc/ssl/crl location with a .crl extension. On boot if the directory is present it will put the hashes to the directory /etc/httpd/crl
 
 **OSSIM ISA**
+
 * OSSIM ISA Service endpoints documented in swagger
 * UI will query OSSIM-ISA for ATP algorithms and parameters.
 * isa-ui and ossim-isa-service have been upgraded to Grails 3.3.0
 
 **OMAR Geoscript**
+
 * Docs use application.yml directly for configuration
 
 **Native S3 Access**
+
 * Added BlockIstream and BlockIstreamBuffer for block buffer stream implementation
 * Added Support for creating blockistreams in the StreamFactory
 * Removed the deprecated code from StreamFactory and fixed all code in OSSIM that calls the deprecated StreamFactory
