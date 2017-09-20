@@ -1,4 +1,4 @@
-# O2 Web Services - Daytona Beach 2.0.2
+# O2 Web Services - Egmont Key 2.1.0
 
 These docs serve as a guide for installing and running an individual service. It is up to the organization's best practices on how to orchestrate and configure the applications at scale.
 
@@ -8,90 +8,71 @@ These docs serve as a guide for installing and running an individual service. It
 
 In no particular order, here are the major new and updated features provided in this release.
 
-**TLV**
-
-* The TLV API support searchLibraries=<lib1,lib2> as a way to automatically select multiple search libraries.
-* The search dialog will present a checkbox for each library that is available to search in.
-* WFS queries will now be client-side, using the user's credentials
-
-**Native S3**
-
-* Added Step definitions for Direct S3 access
-* Added Gherkin for the scenarios
-* Added the target to the staging part of the S3 direct access
-* In o2-paas we added the securityContext to allow privileged user and added the setup SYS_ADMIN and runAsUser 1001 to force a 1001 startup to each container we need privileged user for. This includes OMS, WCS, DOWNLOAD, MENSA. and STAGER. We also added a BUCKETS env variable to allow one to specify the bucks to mount.
-* On the OpenShift cluster we must run on master "oc edit scc restricted" to enable pods: to come up as privileged, allow SYS_ADMIN to be set and to RunAsAny user.
-* Only the pipelines we are currently using have been modified to support mounting the s3 on startup. On our distribution we modified omar-oms, omar-download, omar-stager, and omar-mensa. We added a run.sh that checks for the environment variable BUCKETS and mount the buckets to a /s3 directory
-* We added a pipeline ossim-goofys that takes the goofys master branch and builds the binary and uploads it to the bucket location ossimlabs/dependencies/goofys/goofys. The Docker SPEC for the build pipelines mentioned uses a wget to install the goofys onto the /usr/bin directory.
-
-**OC2S Environment**
-
-* Added to the PKI confluence All certificates and how to convert them to a PEM
-* Currently only dev has been tested. we modified the location of the PKI CERTs to be it's own directory /etc/ssl/omar-certs.
-* Modified our unclass PKI to use the /etc/ssl/omar-certs directory
-* We now use the config mapping on the high side to replace the certs at deploy time
-
-**One-way Guard**
-
-* SMTP Notifier Github repo created
-* SMTP Notifier Jenkins pipelines created for master and dev
-* SMTP Notifier Code is complete with the ability to configure the SMTP settings, 'From' email address, and email signature
-
-**PKI Authorization**
-
-* Modified the PKI proxy image on high side to include the Certificate Revocation List setup for all CRL posted on the high side
-* Updated the Jenkins pipeline to automatically update the revocation list
-* Updated the Confluence for PKI configuration to describe the Jenkins steps being executed by the omar-update-crl pipeline
-
-**OSSIM Mensuration**
-
-* OSSIM now supports wild point filtering
-
-**Basemap**
-
-* Updated the reverese-proxy.conf files for omar-dev, and omar-rel on the unclassified cluster to use the new o2-mapproxy route
-* Updated the reverese-proxy.conf files for c2s-dev on the classified cluster to use the new o2-mapproxy route
-* Removed service-proxy route from the reverse-proxy.conf files for omar-dev, and omar-rel on unclassified cluster
-* Added 'Project deprecated' message to omar-server-proxy README.md on Github
-* Removed the server-proxy Deployment, Service and Pods on omar-rel and omar-dev unclass
-* Removed master and dev Jenkin's pipelines for omar-service-proxy
-* Removed service-proxy from deployment template
-
-**EFK Logging**
-
-* Web proxy and pki proxy now log to standard out
-
-**Automated Testing**
-
-* Added TLV scenarios of automated UI testing.
-* Separated tests into backend, frontend, and ingest tests.
-* Created separate Jenkins pipelines for dev and master of each test type.
-* Tests now run periodically and after a related project builds (backend tests run after omar-wfs, etc, are built)
-
-**Placename (Twofishes)**
-
-* Added a Jenkins build pipeline for twofishes app so that its build and deployment is automated.
-
-**Image Ingest**
-
-* scdf image dumper - Added call to OSSIM JNI DataInfo object to get image info for each image staged.
-
 **OMAR UI**
 
-* Modified the geoscript and ui configs for OCS Dev define and use the highside color scheme for footprints.
-* Added a new profile for geoscript oc2s dev until we are able to update the stage env.
+* Added select/dropdown box above the image card list in the UI
+* The new dropdown can be used to change the OMAR backing services to a federated O2
+* The search map updates the footprint layer to match the currently selected OMAR
+* The search list cards update, and contain imagery from the currently selected OMAR
+* The Imagespace map will load the image from the currently selected OMAR
+* Ancillary services such as KML SuperOverlay, Download, Mensa also use the currently selected OMAR
+* All TLV requests from the O2 UI will post to the TLV app installed with the currently selected OMAR
+* The Share link will provide the user with a link to the associated OMAR that has been selected
+* The Imagespace UI now displays the server, the image id, and the acquisition date from the selected OMAR. The HTML layout and colors were modfiied for better presentation of the data
+* Moved all of the WFS calls that were sprinkled throughout the various javascript modules into one homogeneous service (wfs.service.js)
+* Added a new 'About' dropdown menu
+* Displays the following information O2, release name, release number, UI build version
+* Admin can control the visibility of the menu via the application.yml
+* Added spinner icon to Search map page
+* Added spinner icon to the image Space page
+* Spinners on map pages will be visible and spin while tiles are being loaded into the map view
+* Added configurable message of the day banner to the home page
+* The banner can be disabled via application.yml param
 
-### Bugs
+**OMAR Mensa**
 
-The following bugs have been resolved:
+* Removed GeoScript from omar-mensa
+* omar-mensa now has a direct JTS dependency
 
-* The OpenShift integration environment on unclassified AWS was having resource utilization issues. OpenShift stack upgraded to 1.5.1.
+**OMAR Config Server**
+
+* OMAR config server now has two profiles: native and remote. The config server can serve files located in the service's local file system at ${HOME}/configs/ (/home/omar/configs/)
+
+**OMAR Web Proxy**
+
+* removed the CERT definitions out of GIT
+* Edited the docker configuration to remove the CERTS and to make sure we have directories for the different configurations.
+* Added config map definitions on the omar-dev so that the reverse proxy and CERT's and CRL can be defined on startup for that container.
+* Added README for the new configuration layout.
+* Added omar-web-proxy to the omar-docs generation
+* Created a new repository under ossimlabs after removing the CERTS.
+* Added support for CRL config maps to /etc/ssl/crl location with a .crl extension. On boot if the directory is present it will put the hashes to the directory /etc/httpd/crl
+
+**OSSIM ISA**
+
+* OSSIM ISA Service endpoints documented in swagger
+* UI will query OSSIM-ISA for ATP algorithms and parameters.
+* isa-ui and ossim-isa-service have been upgraded to Grails 3.3.0
+
+**OMAR Geoscript**
+
+* Docs use application.yml directly for configuration
+
+**Native S3 Access**
+
+* Added BlockIstream and BlockIstreamBuffer for block buffer stream implementation
+* Added Support for creating blockistreams in the StreamFactory
+* Removed the deprecated code from StreamFactory and fixed all code in OSSIM that calls the deprecated StreamFactory
+* Added a get list to the Keywordlist that will sort and get a list of prefix based on our array formatted key prefix.
+* Added Doxygen style comments through the code
 
 ## The following new repositories have been added to the OMAR service baseline
 
-* ossim-rpm
-* ossim-rpm-dependencies
-* isa-ui (changed from isa)
-* omar-database
+* omar-twofishes
+* omar-mapproxy
+
+## The following new repositories have been removed from the OMAR service baseline
+
+* omar-pki-proxy
 
 ## Guides
