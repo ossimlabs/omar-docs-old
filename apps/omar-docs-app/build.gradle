@@ -47,7 +47,6 @@ buildscript {
         "VOLUME /dev/random /home",
         "EXPOSE 80 443",
         "WORKDIR \$HOME",
-        "USER 1001",
         "CMD ./run-httpd.sh"
     ]}
   }
