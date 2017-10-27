@@ -36,6 +36,7 @@ export REPOS=(
 	"github.com/ossimlabs/omar-scdf-stager.git"	
 	"github.com/ossimlabs/omar-scdf-indexer.git"	
 	"github.com/ossimlabs/omar-sqs.git"
+	"github.com/ossimlabs/omar-mapproxy.git"
 	"github.com/ossimlabs/omar-stager.git"
 	"github.com/ossimlabs/omar-superoverlay.git"
 	"github.com/ossimlabs/omar-turbine-server.git"

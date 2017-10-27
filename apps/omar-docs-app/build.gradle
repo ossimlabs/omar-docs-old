@@ -48,7 +48,7 @@ buildscript {
         "EXPOSE 80 443",
         "WORKDIR \${HOME}",
         "USER 1001",
-        "CMD ./run-httpd.sh"
+        "CMD /home/omar/run-httpd.sh"
     ]}
   }
   if(System.env.OMAR_COMMON_PROPERTIES)

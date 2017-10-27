@@ -32,7 +32,7 @@ for repo in ${REPOS[@]} ; do
  		pushd $app
 	fi
 
-	git pull origin dev
+	git pull origin $OSSIM_GIT_BRANCH
 
 	popd
 done
