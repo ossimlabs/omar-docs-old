@@ -44,7 +44,7 @@ buildscript {
             chown -R 1001:0 \${HOME} && \
             chmod 770 \${HOME}/*.sh && \
             chown -R 1001:0 \${HOME}""",
-        "VOLUME /dev/random /home",
+        "VOLUME /dev/random",
         "EXPOSE 80 443",
         "WORKDIR \${HOME}",
         "USER 1001",
