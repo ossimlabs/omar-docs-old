@@ -1,4 +1,4 @@
-# O2 Web Services - Egmont Key 2.1.1
+# O2 Web Services - Egmont Key 2.1.2
 
 These docs serve as a guide for installing and running an individual service. It is up to the organization's best practices on how to orchestrate and configure the applications at scale.
 
@@ -6,52 +6,51 @@ These docs serve as a guide for installing and running an individual service. It
 
 ## The following updates/upgrades have been implemented
 
-* Grails updated to 3.3.1 for all OMAR apps
-* Grade updated to 3.5 for all OMAR apps
-* Spring Cloud Services updated to Dalston.SP4
-* GeoScript updated to 1.9.0
-* Upgraded Swagger 1.5.x (OpenAPI 2.0)
+* NTR
 
 ### Features
 
 In no particular order, here are the major new and updated features provided in this release.
 
-**OMAR UI**
+**ISA**
 
-* DEV, STAGE, and PROD UI's are now viewable
-* UI's are no longer throwing an insecure certificate warning
-* Added configurable Metrics dropdown menu to the UI
-* Added username from PKI to the UI
-* Secure System message is shown when the user first logs into an O2 interface
-* The UI ImageSpace getTile was refactored to be more efficient when providing tiles. This achieved the same affect as calling OMS directly
+* Ability to load and view MSP triangulated photoblock
 
 **OSSIM**
 
-* Added State base object
-* Added ImageHandlerState object
-* Added TIFFHandlerState object for TIFF states
-* Added Registry for allocating a State object from a saved state
-* Added support to ossimTiffTileSource to populate a state
-* Added state support in the base ossimImageHandler
-* Added State.h and .cpp
-* Added ImageHandlerState.h and .cpp
-* Added ImageHandlerStateRegistry.h .cpp
-* Added ImageHandlerStateFactory.h .cpp
-* Added TiffHandlerState.h .cpp
-* Added StateFactoryBase.h template for factory lists using shared pointer
-* Modified ossim core library, ossim-plugins, ossim-gui, ossim-video, ossim-planet, ossim-planet-gui and ossim-oms for all OpenThreads mutex locations and changed to std::mutex
-* Added doxygen style comments to some of the headers
-* Removed occurrence of OpenThreads within ossim, ossim-oms, ossim-gut, ossim-plugins and ossim-video
-* Added pause and resume support to the Thread base
-* Removed occurrence of OpenThreads the build system of ossim modules that no longer require it
+* Moved ossim-plugins/csm3 to it's own repo ossim-csm-plugin
+* Modified the cam plugin to allow one to turn off an on plugin support from the CSM
+* Added des_parsing in ossim and fixed a des parsing error for the dump
+* Added keyword for the des_parser enabled.
+* Added keywords for the cam plugin location
+* Added keywords for the cam data dir
+* Added keywords for enable_plugins and disable_plugins that the ossim-csm-plugin module uses.
+* Fixed geocell to zero out the state when building overviews.
+* Added to test timings to make sure that the state loads are "Faster" than non state loads
+* Added calls from our batch test to use the new state test application for testing the ossim baseline.
+
+**Spring Cloud Admin**
+
+* Created Docker container for Spring Cloud Admin
+* Created github project with master and dev branches
+* Created Jenkins pipelines for master and dev
+* Created installation documentation for service
+* Spring Cloud docker deployed on low-side
+
+**TLV**
+
+* TLV now accepts imageID only URLs and centers on the identified image
+
+**WFS**
+
+* Additional logging from WFS on type and number of queries
 
 ## The following new OMAR service has been created
 
-* omar-turbine-server
-* omar-zipkin-server
+* NTR
 
 ## Bug Fixes
 
-* Fixed bug with running concurrent applications in the same dev tree
+* NTR
 
 ## Guides
