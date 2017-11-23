@@ -1,7 +1,6 @@
 #! /bin/bash
 . functions.sh
 
-ls -alhR
 mkdir Dockerfiles
 pushd Dockerfiles
 aws s3 cp s3://o2-delivery/dev/docker . --exclude "*" --include "*-Dockerfile" --recursive
@@ -16,10 +15,10 @@ for repo in ${REPOS[@]} ; do
             # only modify the guide if it exists and a dockerfile exists
             if [ -e $GUIDE ]; then
                 echo "$GUIDE"
-                echo -n "## Dockerfile" >> $GUIDE
-                echo -n "\`\`\`" >> $GUIDE
+                echo "## Dockerfile" >> $GUIDE
+                echo "\`\`\`" >> $GUIDE
                 cat $dockerfile >> $GUIDE
-                echo -n "\`\`\`" >> $GUIDE
+                echo  "\`\`\`" >> $GUIDE
             fi
         fi
     done
