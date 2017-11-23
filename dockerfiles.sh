@@ -1,6 +1,7 @@
 #! /bin/bash
 . functions.sh
 
+ls -alhR
 mkdir Dockerfiles
 pushd Dockerfiles
 aws s3 cp s3://o2-delivery/dev/docker . --exclude "*" --include "*-Dockerfile" --recursive
