@@ -9,14 +9,15 @@ for repo in ${REPOS[@]} ; do
     app=`echo $repo | sed -n 's/.*[/]\(.*\).git$/\1/p'`
 
     for dockerfile in `ls`; do
-        echo "$dockerfile"
         if [[ $dockerfile == *"$app"* ]]; then
 
-            GUIDE=$app/docs/install-guide/$app.md
+            GUIDE=$SCRIPT_DIR/docs/$app/docs/install-guide/$app.md
             # only modify the guide if it exists and a dockerfile exists
-            if [ -e $SCRIPT_DIR/docs/$GUIDE ]; then
-                DOCKERFILE=`cat $dockerfile`
-                sed -i "2iv$DOCKERFILE" $GUIDE
+            if [ -e $GUIDE ]; then
+                echo -n "## Dockerfile" >> $GUIDE
+                echo -n "```" >> $GUIDE
+                cat $dockerfile >> $GUIDE
+                echo -n "```" >> $GUIDE
             fi
         fi
     done
