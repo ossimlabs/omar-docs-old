@@ -10,7 +10,8 @@ for repo in ${REPOS[@]} ; do
     INSTALL_GUIDE=$app/docs/install-guide/$app.md
 
     if [ -e $SCRIPT_DIR/docs/$CONF_FILE ] && [ -e $SCRIPT_DIR/docs/$INSTALL_GUIDE ]; then
-
+        echo "" >> $INSTALL_GUIDE
+        echo "## Configuration" >> $INSTALL_GUIDE
         echo "\`\`\`" >> $INSTALL_GUIDE
         cat $CONF_FILE >> $INSTALL_GUIDE
         echo "\`\`\`" >> $INSTALL_GUIDE
