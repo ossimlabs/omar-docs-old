@@ -17,9 +17,9 @@ for repo in ${REPOS[@]} ; do
             if [ -e $GUIDE ]; then
                 echo "$GUIDE"
                 echo -n "## Dockerfile" >> $GUIDE
-                echo -n "```" >> $GUIDE
+                echo -n "\`\`\`" >> $GUIDE
                 cat $dockerfile >> $GUIDE
-                echo -n "```" >> $GUIDE
+                echo -n "\`\`\`" >> $GUIDE
             fi
         fi
     done
