@@ -8,8 +8,8 @@ export GUIDES=(
 export REPOS=(
 	"github.com/ossimlabs/omar-common.git"
 	"github.com/radiantbluetechnologies/isa-ui.git"
-  "github.com/ossimlabs/omar-admin-server.git"
-  "github.com/ossimlabs/omar-avro.git"
+    "github.com/ossimlabs/omar-admin-server.git"
+    "github.com/ossimlabs/omar-avro.git"
 	"github.com/ossimlabs/omar-avro-metadata.git"
 	"github.com/ossimlabs/omar-base.git"
 	"github.com/ossimlabs/omar-cesium-terrain-builder.git"
