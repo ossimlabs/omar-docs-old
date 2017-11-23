@@ -14,7 +14,7 @@ for repo in ${REPOS[@]} ; do
             GUIDE=$SCRIPT_DIR/docs/$app/docs/install-guide/$app.md
             # only modify the guide if it exists and a dockerfile exists
             if [ -e $GUIDE ]; then
-                echo "$GUIDE"
+                echo "" >> $GUIDE # make sure you start on a new line
                 echo "## Dockerfile" >> $GUIDE
                 echo "\`\`\`" >> $GUIDE
                 cat $dockerfile >> $GUIDE
