@@ -36,7 +36,11 @@ node(""){
             withCredentials([[$class: 'UsernamePasswordMultiBinding',
                 credentialsId: 'ossimlabs-minion',
                 usernameVariable: 'GIT_USERNAME',
-                passwordVariable: 'GIT_PASSWORD']]) {
+                passwordVariable: 'GIT_PASSWORD'],
+                [$class: 'UsernamePasswordMultiBinding',
+                    credentialsId: 'dockerCredentials',
+                    usernameVariable: 'OPENSHIFT_USERNAME',
+                    passwordVariable: 'OPENSHIFT_PASSWORD']]) {
 
                 dir( "${ env.WORKSPACE }/omar-docs" ) {
                     sh """
