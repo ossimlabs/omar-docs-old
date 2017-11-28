@@ -20,6 +20,8 @@ for repo in ${REPOS[@]} ; do
                 cat $dockerfile >> $GUIDE
                 echo  "\`\`\`" >> $GUIDE
             fi
+
+            rm $dockerfile
         fi
     done
 done
