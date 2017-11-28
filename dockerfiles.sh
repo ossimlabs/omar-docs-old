@@ -21,7 +21,7 @@ for repo in ${REPOS[@]} ; do
                 echo  "\`\`\`" >> $GUIDE
             fi
 
-            rm $dockerfile
+            continue 2
         fi
     done
 done
