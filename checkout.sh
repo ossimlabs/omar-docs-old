@@ -22,17 +22,11 @@ for repo in ${REPOS[@]} ; do
 		echo "Checking out documentation for $app..."
 		git init
 		git remote add -f origin https://$GIT_USERNAME:$GIT_PASSWORD@$repo
-		rm -rf $app/apps
-		git config core.sparsecheckout true
-		echo "apps/$app-app/gradle.properties" >> .git/info/sparse-checkout
-		echo "apps/$app-app/grails-app/conf/application.yml" >> .git/info/sparse-checkout
-		echo "docs" >> .git/info/sparse-checkout
-		echo "gradle.properties" >> .git/info/sparse-checkout
 	else
  		pushd $app
 	fi
 
-	git pull origin $OSSIM_GIT_BRANCH
+	git pull --depth=1 origin $OSSIM_GIT_BRANCH
 
 	popd
 done

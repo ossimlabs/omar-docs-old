@@ -17,8 +17,6 @@ for repo in ${REPOS[@]} ; do
 
     for deploymentConfig in `ls`; do
         if [[ $deploymentConfig == *"$app"* ]]; then
-            echo "Fount it!"
-            echo $deploymentConfig
             GUIDE=$SCRIPT_DIR/docs/$app/docs/install-guide/$app.md
             # only modify the guide if it exists and a deployment config exists
             if [ -e $GUIDE ]; then

@@ -6,10 +6,12 @@ for repo in ${REPOS[@]} ; do
 
     app=`echo $repo | sed -n 's/.*[/]\(.*\).git$/\1/p'`
 
-    CONF_FILE=$app/apps/$app-app/grails-app/conf/application.yml
-    INSTALL_GUIDE=$app/docs/install-guide/$app.md
+    # only take the first application.yml
+    # sometimes the plugin directory will have one as well
+    CONF_FILE=`find $SCRIPT_DIR/docs/$app -name "application.yml" | head -1`
+    INSTALL_GUIDE=$SCRIPT_DIR/docs/$app/docs/install-guide/$app.md
 
-    if [ -e $SCRIPT_DIR/docs/$CONF_FILE ] && [ -e $SCRIPT_DIR/docs/$INSTALL_GUIDE ]; then
+    if [ "$CONF_FILE" != "" ] && [ -e $CONF_FILE ]  && [ -e $INSTALL_GUIDE ]; then
         echo "" >> $INSTALL_GUIDE
         echo "## Application YML Configuration" >> $INSTALL_GUIDE
         echo "\`\`\`" >> $INSTALL_GUIDE
