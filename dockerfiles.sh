@@ -3,7 +3,7 @@
 
 mkdir Dockerfiles
 pushd Dockerfiles
-aws s3 cp s3://o2-delivery/dev/docker . --exclude "*" --include "*-Dockerfile" --recursive
+aws s3 cp s3://o2-delivery/$OSSIM_GIT_BRANCH/docker . --exclude "*" --include "*-Dockerfile" --recursive
 
 for repo in ${REPOS[@]} ; do
     app=`echo $repo | sed -n 's/.*[/]\(.*\).git$/\1/p'`
