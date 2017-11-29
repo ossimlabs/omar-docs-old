@@ -23,6 +23,9 @@ This file will cycle through all the apps, building a "guides" table. If a parti
 ## versioning.sh
 This file will look for a gradle.properties file in the repo. If there is a buildNumber=#.#.# notation in that file, it will be annotated at the top of the guide pages as a version number.
 
+## source-code.sh
+This file will inject the github URL of an application's source code.
+
 ## mkdocs-yml.sh
 This file will cycle through all the apps, incorporating any of the following files into the overall documentation `mkdocs.yml`.
 * `docs/install-guide/<app>.md`
