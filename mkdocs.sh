@@ -9,12 +9,18 @@ source $SCRIPT_DIR/env.sh
 
 source $SCRIPT_DIR/checkout.sh
 source $SCRIPT_DIR/home-page.sh
-source $SCRIPT_DIR/config.sh
+source $SCRIPT_DIR/application-yml.sh
+source $SCRIPT_DIR/dockerfiles.sh
+#source $SCRIPT_DIR/deployment-config.sh
+source $SCRIPT_DIR/source-code.sh
 source $SCRIPT_DIR/versioning.sh
-source $SCRIPT_DIR/yml.sh
+source $SCRIPT_DIR/mkdocs-yml.sh
 
 # remove any existing stylesheets
 find . -name "*.css" -type f -delete
+
+# remove any existing javascript files
+find . ! -name "api.js" -name "*.js" -type f -delete
 
 mkdocs build
 
