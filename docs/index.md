@@ -4,20 +4,26 @@ These docs serve as a guide for installing and running an individual service. It
 
 ## Release Notes
 
-## The following updates/upgrades have been implemented
-
-* NTR
-
 ### Features
 
 In no particular order, here are the major new and updated features provided in this release.
 
-## The following new OMAR service has been created
+### Overall
 
-* NTR
+* OpenShift deployment configuration yaml files now stored in each service repository. Configurations now included as part of service documentation release.
+* Service yaml configuration documentation improvements
 
-## Bug Fixes
+### OMAR-UI
 
-* NTR
+* Multi-image select download capability
+
+### OMAR-WEB-PROXY
+
+* Logging support for PKI user authentication for use in login metrics
+
+### Kibana Logging
+
+* Ingest metrics dashboards created
+* WFS metrics dashboards created
 
 ## Guides
