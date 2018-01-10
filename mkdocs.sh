@@ -1,6 +1,6 @@
 #! /bin/bash
 
-pushd `dirname $0` >/dev/null
+pushd `dirname ${BASH_SOURCE[0]}` >/dev/null
 export SCRIPT_DIR=`pwd -P`
 popd >/dev/null
 
