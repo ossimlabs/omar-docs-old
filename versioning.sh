@@ -10,11 +10,6 @@ for repo in ${REPOS[@]} ; do
     app=`echo $repo | sed -n 's/.*[/]\(.*\).git$/\1/p'`
     getRepoVersion VERSION $app
 
-#    VERSION=""
-#    for x in `find $app -name gradle.properties`; do
-#        VERSION=`grep buildVersion $x | awk -F "=" '{print $2}'`
-#    done
-
     for guide in ${GUIDES[@]} ; do
         GUIDE=$app/docs/$guide/$app.md
 

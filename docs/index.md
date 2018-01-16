@@ -1,57 +1,51 @@
-# O2 Web Services - Egmont Key 2.1.1
+# O2 Web Services - Fort Myers 2.2.1
 
 These docs serve as a guide for installing and running an individual service. It is up to the organization's best practices on how to orchestrate and configure the applications at scale.
 
 ## Release Notes
 
-## The following updates/upgrades have been implemented
+## TO DO
 
-* Grails updated to 3.3.1 for all OMAR apps
-* Grade updated to 3.5 for all OMAR apps
-* Spring Cloud Services updated to Dalston.SP4
-* GeoScript updated to 1.9.0
-* Upgraded Swagger 1.5.x (OpenAPI 2.0)
+Make a script to delete artifacts from S3
 
 ### Features
 
 In no particular order, here are the major new and updated features provided in this release.
 
-**OMAR UI**
+### Overall
 
-* DEV, STAGE, and PROD UI's are now viewable
-* UI's are no longer throwing an insecure certificate warning
-* Added configurable Metrics dropdown menu to the UI
-* Added username from PKI to the UI
-* Secure System message is shown when the user first logs into an O2 interface
-* The UI ImageSpace getTile was refactored to be more efficient when providing tiles. This achieved the same affect as calling OMS directly
+* Automated cucumber testing added to classified deployment 
+* Artifactory dependencies available for high-side builds
+* New ingest dashboard that displays metrics and listings of all ingested imagery
+* Automated cucumber tests for KML download service
+* Additional jMeter tests for all externally facing services
 
-**OSSIM**
+### OSSIM-ISA
 
-* Added State base object
-* Added ImageHandlerState object
-* Added TIFFHandlerState object for TIFF states
-* Added Registry for allocating a State object from a saved state
-* Added support to ossimTiffTileSource to populate a state
-* Added state support in the base ossimImageHandler
-* Added State.h and .cpp
-* Added ImageHandlerState.h and .cpp
-* Added ImageHandlerStateRegistry.h .cpp
-* Added ImageHandlerStateFactory.h .cpp
-* Added TiffHandlerState.h .cpp
-* Added StateFactoryBase.h template for factory lists using shared pointer
-* Modified ossim core library, ossim-plugins, ossim-gui, ossim-video, ossim-planet, ossim-planet-gui and ossim-oms for all OpenThreads mutex locations and changed to std::mutex
-* Added doxygen style comments to some of the headers
-* Removed occurrence of OpenThreads within ossim, ossim-oms, ossim-gut, ossim-plugins and ossim-video
-* Added pause and resume support to the Thread base
-* Removed occurrence of OpenThreads the build system of ossim modules that no longer require it
+* ISA refactored and deployed to dev-test instance to support ATP
+* RPCs sent to NASA NGT DEM extraction tool successfully create DEM
+* Initial MSP photoblock to RPC conversion service completed
 
-## The following new OMAR service has been created
+### OMAR-GEOSCRIPT
 
-* omar-turbine-server
-* omar-zipkin-server
+* New heatmap display of most requested imagery over last day, 3 days, 7 days
 
-## Bug Fixes
 
-* Fixed bug with running concurrent applications in the same dev tree
+### OMAR-WFS
+
+* Added cucumber tests for WFS post to the omar-oldmar proxy that FADE uses for queries 
+* Changed boundingBox definition to standard "BBOX."
+* Addition of WFS Kibana dashboard that displays WFS usage patterns and searches
+
+
+### OMAR-UI
+
+* Now supports Snake_Case & camelCase formatted Avro metadata
+* Multi-deployment federation improvements added
+
+
+### OMAR-STAGER
+
+* Modified stager to allow for ingest of ENVI directory structure
 
 ## Guides

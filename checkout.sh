@@ -7,34 +7,9 @@ for repo in ${REPOS[@]} ; do
 
 	app=`echo $repo | sed -n 's/.*[/]\(.*\).git$/\1/p'`
 
-	# start from scratch if the user passes the "clean" argument
-	if [ "$1" = "clean" ]; then
-		rm -rf $app
-	fi
-
-	# if a directory does not exist for the app, create one
-	if [ ! -d "$app" ]; then
-		echo "Creating $app docs directory..."
-  		mkdir $app
-		pushd $app
-
-		# only checkout the folder containing the documentation
-		echo "Checking out documentation for $app..."
-		git init
-		git remote add -f origin https://$GIT_USERNAME:$GIT_PASSWORD@$repo
-		rm -rf $app/apps
-		git config core.sparsecheckout true
-		echo "apps/$app-app/gradle.properties" >> .git/info/sparse-checkout
-		echo "apps/$app-app/grails-app/conf/application.yml" >> .git/info/sparse-checkout
-		echo "docs" >> .git/info/sparse-checkout
-		echo "gradle.properties" >> .git/info/sparse-checkout
-	else
- 		pushd $app
-	fi
-
-	git pull origin $OSSIM_GIT_BRANCH
-
-	popd
+	rm -rf $app
+	echo "Checking out documentation for $app..."
+	git clone --depth=1 https://$GIT_USERNAME:$GIT_PASSWORD@$repo
 done
 
 popd
