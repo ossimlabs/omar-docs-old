@@ -15,6 +15,7 @@ node(""){
     def appName = "omar-docs"
     def omarCommonProjName = "omar-common"
     env.OMAR_COMMON_PROPERTIES = "${ workspaceDir }/${ omarCommonProjName }/omar-common-properties.gradle"
+    env.O2_DEV_HOME=pwd()
 
     stage( "Checkout" ){
         dir( appName ) {
@@ -87,8 +88,8 @@ node(""){
 
                 // Run all tasks on the app. This includes pushing to OpenShift and S3.
                 sh """
-                    pushd ${ workspaceDir }/${ appName }/apps/${ appName }-app
-                    ./gradlew ${GRADLE_TASK}
+                    pushd ${ workspaceDir }/${appName}
+                    gradle :${appName}-app:${GRADLE_TASK}
                     popd
                 """
             }
