@@ -56,8 +56,10 @@ buildscript {
     apply from: System.env.OMAR_COMMON_PROPERTIES
   }
   repositories {
-    mavenLocal()
     maven { url "${ossimMavenProxy}" }
+    if( Boolean.parseBoolean( System.env.WWW_CONNECTED ) ) {
+        mavenLocal()
+    }
   }
   dependencies {
         classpath "org.jfrog.buildinfo:build-info-extractor-gradle:latest.release"
@@ -71,9 +73,11 @@ group "io.ossim.omar.apps"
 
 
 repositories {
-  mavenLocal()
   maven { url "${ossimMavenProxy}" }
-  mavenCentral()
+  if( Boolean.parseBoolean( System.env.WWW_CONNECTED ) ) {
+    mavenLocal()
+    mavenCentral()
+  }
 }
 
 dependencies {
