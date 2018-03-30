@@ -1,4 +1,4 @@
-# O2 Web Services - Gasparilla 2.3.0
+# O2 Web Services - Hollywood 2.4.0
 
 These docs serve as a guide for installing and running an individual service. It is up to the organization's best practices on how to orchestrate and configure the applications at scale.
 
@@ -11,65 +11,36 @@ In no particular order, here are the major new and updated features provided in 
 
 
 ### Overall
+* BE tables updated to support accurate BE searches
 
-* Logging fields changed from "status" to "httpStatus"
-* Logging time format to UTC universal timestamp format
-* Automatic versioning of services within documentation
+### OMAR-CORE
 
-* Updated apps to Swagger 3.10.0
+* Modified omar-core taglib, and added new .css property to remove the text shadow.
 
-### OSSIM
+### OMAR-OMS
+* OMS now provides access to thumbnails via the raster entry ID.
+* Thumbnail supports relocatable overviews and histograms.
 
-* Fixed bugs in the base ossimImageHandler that was not supporting relocatable histograms and overviews properly
-* Added support in the core c++ chipper class to add keywords for loading the external locations. We now prefix with each image. image0 image1...etc
-* Added modifications to the chipping service to actually be able to pass in the overview and histogram locations
-* Added a ossim-batch-test to chipper util to support relocatable histogram and overview chipping
-
-### ISA-UI
-
-* More than 10 images may be brought up in ISA
-
-### OMAR-CONFIG-SERVER
-
-* Added config server failover using configMaps generated with the omar-config-repo-dev and oamr-config-repo-rel pipelines.
-
-### OMAR-TWOFISHES
-
-* Added documentation for usage.
-
-### OC2S-METRICS-DASHBOARD
-
-* Kibana dashboards created to consolidate information from all OMAR deployment environments
-* New ingest dashboard that displays metrics and listings of all ingested imagery
-
-### OMAR-AVRO-METADATA
-
-* omar-avro-metadata DynamoDB now configurable
-
-### OMAR-FRONTEND-TEST
-
-* Selenium tests now properly run against sites with PKI frontend
+### OMAR-RASTER
+* Subsequent image entries are now no longer indexed unless marked "NODISPLY".
+* Subsequent image entries are now no longer produce overviews or histograms unless marked "NODISPLY".
 
 ### OMAR-SQS-STAGER
-
-* Created a new stager application in github called omar-sqs-stager
-* Added logging for the new stager
-* Added documentation for the new stager
-* Added YAMl configuration to config-repo
+* Added thumbnail generation to the stager YAML.
+* Different image files with the same name are now supported.
 
 ### OMAR-UI
 
-* UI now supports Snake_Case & camelCase formatted Avro metadata
-* Multi-deployment federation improvements added to omar-ui
+* Reduced the number of WFS queries required from the omar-ui.
+* Added .css property to the styles.css in omar-ui.
+* Color coded, auto-generated footprint legend to assist users in identifying sensor types.
+* Selectable search results allow for export, save, and viewing of up to ten images.
+* Updated UI calls to pass record ID to OMS thumbnail generation.
+* Filter now allows a user to exclude unknown values.
+* Active filters breadcrums are now displayed shown under the navigation bar.
 
-### OMAR-WMTS-APP
-
-*  WMTS Swagger page improvements
-
-### OSSIM-ISA-SERVICE
-
-* ISA job are now done asynchronously
-* RPCs sent to NASA NGT DEM extraction tool successfully create DEM
-* Initial MSP photoblock to RPC conversion service completed
+### OSSIM
+* Added new Codec registry for NITF.
+* Added new codec J2K factory interface for NITF.
 
 ## Guides
