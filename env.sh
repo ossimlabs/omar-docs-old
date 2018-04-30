@@ -12,8 +12,6 @@ export REPOS=(
 	"github.com/ossimlabs/omar-avro-metadata.git"
 	"github.com/ossimlabs/omar-base.git"
 	"github.com/ossimlabs/omar-basemap.git"
-	"github.com/ossimlabs/omar-cesium-terrain-builder.git"
-	"github.com/ossimlabs/omar-cesium-terrain-server.git"
 	"github.com/ossimlabs/omar-config-server.git"
 	"github.com/ossimlabs/omar-disk-cleanup.git"
 	"github.com/ossimlabs/omar-download.git"
