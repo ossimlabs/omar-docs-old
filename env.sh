@@ -28,7 +28,7 @@ export REPOS=(
 	"github.com/ossimlabs/omar-basemap.git"
 	"github.com/ossimlabs/omar-stager.git"
 	"github.com/ossimlabs/omar-superoverlay.git"
-	"github.com/ossimlabs/tlv.git"
+	"$GIT_SSH_ENDPOINT:$GIT_PUBLIC_ORGANIZATION/tlv.git"
 	"github.com/ossimlabs/omar-turbine-server.git"
 	"github.com/ossimlabs/omar-twofishes.git"
 	"github.com/ossimlabs/omar-ui.git"
