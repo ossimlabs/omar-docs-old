@@ -9,7 +9,7 @@ for repo in ${REPOS[@]} ; do
 
 	rm -rf $app
 	echo "Checking out documentation for $app..."
-	git clone --depth=1 https://$GIT_USERNAME:$GIT_PASSWORD@$repo
+	git clone --depth=1 $repo
 done
 
 popd
