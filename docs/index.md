@@ -1,4 +1,4 @@
-# O2 Web Services - Gasparilla 2.3.2
+# O2 Web Services - Hollywood 2.4.0
 
 These docs serve as a guide for installing and running an individual service. It is up to the organization's best practices on how to orchestrate and configure the applications at scale.
 
@@ -11,20 +11,32 @@ In no particular order, here are the major new and updated features provided in 
 
 ### Overall
 
-* New visualization listing most viewed/most popular imagery in given timeframe.
-* New visualization listing most viewed/most popular imagery in a given timeframe as a pie chart.
+* Lots of changes to the UI to accomodate multiple screen resolutions and add uniformity.
 
-### OMAR-CMDLN
-* New S3 crawler allows ingest of S3 contents.
+### OMAR-AVRO
+* Fixed date parsing error
+
+### OMAR-STAGER
+* Error message "Premature end of file" is correctly handled
+* SIC codes now ingested, stored, and searchable through OC2S
 
 ### OMAR-UI
-* Added the ability to select multiple images in the UI and create an Openlayers tile layer from the O2 WMS service.
-* GeoRSS export is now available
+* Modified Keyword, Range, and Temporal filters to auto-apply
+* Added startDate and endDate clamping to custom temporal filters
+* Fixed issue where the use of the backspace/delete key outside of the filter inputs would cause the browser to go 'back' to the previous page
+* Thumbnails will appear with a transparent background
+* Added new dropdown menu to the image space UI that allows users to select and render an image via an ImageWMS (Single) or TileWMS (Tiled)
+* Filter text labels modified to support lower-resolution monitors
 
-### OSSIM
-* Added new codec J2K factory interface for NITF
-* Changed the ossimChipperUtil.cpp to add the null pixel flip in another section of code that was missed.
-* Single tile images are now properly handled.
-* Resampling engine was fixed to remove artifacts when zooming out.
+### OMAR-WEB-PROXY
+* Added new logging formats
+
+### OMAR-WMS
+* Supports return of multiple images in a specified order to support mosaicing of individual images
+
+### TLV
+* Added KML as an export option in TLV
+
+
 
 ## Guides
