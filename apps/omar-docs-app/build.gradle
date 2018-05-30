@@ -65,6 +65,11 @@ buildscript {
         classpath "org.jfrog.buildinfo:build-info-extractor-gradle:latest.release"
   }
 }
+
+plugins {
+    id "org.sonarqube" version "2.6.2"
+}
+
 apply plugin: "java"
 apply plugin: "maven-publish"
 apply plugin: "maven"
