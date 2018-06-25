@@ -13,8 +13,8 @@ buildscript {
         "ADD ./yum.repos.d/* /etc/yum.repos.d/",
         "RUN mkdir -p \${HOME}",
         "RUN yum --disablerepo=centos* -y install hostname httpd gettext",
-        """RUN yum -y install nss_wrapper mod_ssl && yum clean all && \
-            sed '/^omar/d' /etc/passwd >\${HOME}/passwd-template && \
+        "RUN yum -y install nss_wrapper mod_ssl && yum clean all",
+        "RUN sed '/^omar/d' /etc/passwd >\${HOME}/passwd-template && \
             setcap cap_net_bind_service+ep /usr/sbin/httpd && \
             setcap cap_net_bind_service+ep /usr/sbin/apachectl""",
         "COPY docs.conf /etc/httpd/conf.d/docs.conf",
