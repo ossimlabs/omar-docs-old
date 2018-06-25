@@ -10,7 +10,7 @@ buildscript {
         "MAINTAINER DigitalGlobe-RadiantBlue",
         "ENV HOME=/home/omar",
         "USER root",
-        "COPY rhel-deps.repo /etc/yum.repos.d/rhel-deps.repo",
+        "ADD ./yum.repos.d/* /etc/yum.repos.d/",
         """RUN mkdir -p \${HOME} && \
             yum --disablerepo=centos* -y install hostname httpd gettext && \
             yum -y install nss_wrapper mod_ssl && yum clean all && \
