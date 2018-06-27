@@ -35,16 +35,14 @@ for repo in ${REPOS[@]} ; do
 
     # Search for a description in the app's README
     if [ -e $SCRIPT_DIR/docs/$app/README.md ]; then
-        echo -n "| " >> index.md
 
         APP_DESCRIPTION=`cat $SCRIPT_DIR/docs/$app/README.md | sed -n '/^## Description/,/[^\s]/ { /## Description/d;p }' | sed '/^\s*$/d'`
-        echo "$APP_DESCRIPTION"
+
         if  [ "$APP_DESCRIPTION" = "" ]; then
             echo "Description not found in README."
-            echo "Description not found." >> index.md
+            echo "| Description not found. |" >> index.md
         else
-            echo "$APP_DESCRIPTION" >> index.md
-            echo " |" >> index.md
+            echo "| $APP_DESCRIPTION |" >> index.md
         fi
     else
         echo "Description not available because no README is found."
