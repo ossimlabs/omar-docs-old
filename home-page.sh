@@ -49,5 +49,5 @@ for repo in ${REPOS[@]} ; do
         echo "| Description not available. |" >> index.md
     fi
 done
-
+cat index.md
 popd
