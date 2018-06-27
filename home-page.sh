@@ -37,7 +37,7 @@ for repo in ${REPOS[@]} ; do
     if [ -e $SCRIPT_DIR/docs/$app/README.md ]; then
         echo -n "| " >> index.md
 
-        APP_DESCRIPTION = `cat $SCRIPT_DIR/docs/$app/README.md | sed -n '/^## Description/,/[^\s]/ { /## Description/d;p }' | sed '/^\s*$/d'`
+        APP_DESCRIPTION=`cat $SCRIPT_DIR/docs/$app/README.md | sed -n '/^## Description/,/[^\s]/ { /## Description/d;p }' | sed '/^\s*$/d'`
         echo "$APP_DESCRIPTION"
         if  [ "$APP_DESCRIPTION" = "" ]; then
             echo "Description not found in README."
