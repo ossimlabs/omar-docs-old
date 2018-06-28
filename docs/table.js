@@ -1,8 +1,8 @@
 $( document ).ready( function() {
     $( "tbody tr" ).each(
         function( index, row ) {
+            var column = $( row ).children()[ 0 ];
             if ( index % 2 == 0 ) {
-                var column = $( row ).children()[ 0 ];
                 var app = $( column ).html();
 
                 var url = "/" + app + "/api";
@@ -20,6 +20,9 @@ $( document ).ready( function() {
                     },
                     url: url
                 });
+            }
+            else {
+                $( column ).attr( "colspan", row.cells.length );
             }
         }
     );
