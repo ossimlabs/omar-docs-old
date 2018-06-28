@@ -20,7 +20,7 @@ source $SCRIPT_DIR/mkdocs-yml.sh
 find . -name "*.css" -type f -delete
 
 # remove any existing javascript files
-find . ! -name "api.js" -name "*.js" -type f -delete
+find . ! -name "table.js" -name "*.js" -type f -delete
 
 mkdocs build
 

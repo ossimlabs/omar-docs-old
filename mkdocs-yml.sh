@@ -27,5 +27,3 @@ for guide in ${GUIDES[@]} ; do
         fi
     done
 done
-
-cat mkdocs.yml
