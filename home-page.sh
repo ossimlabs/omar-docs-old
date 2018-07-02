@@ -13,7 +13,7 @@ for repo in ${REPOS[@]} ; do
 
     getRepoVersion REPO_VERSION $app
 
-    echo -n "| $app " >> index.md
+    echo -n "| **$app** " >> index.md
 
     if [ "$REPO_VERSION" != "" ] ; then
         echo -n "| v${REPO_VERSION} " >> index.md
