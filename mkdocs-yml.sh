@@ -2,8 +2,7 @@
 
 echo "site_name: O2 Web Services" > mkdocs.yml
 echo "extra_javascript:" >> mkdocs.yml
-echo "    - api.js" >> mkdocs.yml
-echo "    - descriptions.js" >> mkdocs.yml
+echo "- table.js" >> mkdocs.yml
 echo "pages:" >> mkdocs.yml
 echo "- Home: index.md" >> mkdocs.yml
 
@@ -28,5 +27,3 @@ for guide in ${GUIDES[@]} ; do
         fi
     done
 done
-
-cat mkdocs.yml
