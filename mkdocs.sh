@@ -11,7 +11,6 @@ source $SCRIPT_DIR/checkout.sh
 source $SCRIPT_DIR/home-page.sh
 source $SCRIPT_DIR/application-yml.sh
 source $SCRIPT_DIR/dockerfiles.sh
-#source $SCRIPT_DIR/deployment-config.sh
 source $SCRIPT_DIR/source-code.sh
 source $SCRIPT_DIR/versioning.sh
 source $SCRIPT_DIR/mkdocs-yml.sh
