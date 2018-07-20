@@ -22,7 +22,7 @@ In no particular order, here are the major new and updated features provided in 
     - omar-turbine-server
     - omar-zipkin-server   
 * Incorporated SQS stager pause and restart into blue/green toggling (available in Jenkins pipeline)
-* Added profile-specific (dev|stage|prod) deployment configuration files specifying the replication count for each service deployment.
+* Added profile-specific (dev|stage|prod) deployment files specifying the replication count for each service deployment.
 
 ### OMAR-WFS
 * WFS calls are changed based on map zoom levels to make them more efficient.
