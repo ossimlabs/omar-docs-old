@@ -12,15 +12,17 @@ In no particular order, here are the major new and updated features provided in 
 
 * Migrated to ElastiStack logging.
 * Removed several apps from release:
-    - omar-scdf-aggregator 
+    - omar-scdf-aggregator
     - omar-scdf-extractor  
-    - omar-scdf-file-parser 
+    - omar-scdf-file-parser
     - omar-scdf-notifier-email
-    - omar-scdf-s3-extractor-filter 
-    - omar-scdf-s3-filter 
-    - omar-scdf-s3-uploader 
+    - omar-scdf-s3-extractor-filter
+    - omar-scdf-s3-filter
+    - omar-scdf-s3-uploader
     - omar-turbine-server
     - omar-zipkin-server   
+* Incorporated SQS stager pause and restart into blue/green toggling (available in Jenkins pipeline)
+* Added profile-specific (dev|stage|prod) deployment files specifying the replication count for each service deployment.
 
 ### OMAR-WFS
 * WFS calls are changed based on map zoom levels to make them more efficient.
