@@ -1,4 +1,4 @@
-# O2 Web Services - Hollywood 2.4.1
+# O2 Web Services - Hollywood 2.4.2
 
 These docs serve as a guide for installing and running an individual service. It is up to the organization's best practices on how to orchestrate and configure the applications at scale.
 
@@ -10,22 +10,14 @@ In no particular order, here are the major new and updated features provided in 
 
 ### Overall
 
-* Migrated to ElastiStack logging.
-* Removed several apps from release:
-    - omar-scdf-aggregator
-    - omar-scdf-extractor  
-    - omar-scdf-file-parser
-    - omar-scdf-notifier-email
-    - omar-scdf-s3-extractor-filter
-    - omar-scdf-s3-filter
-    - omar-scdf-s3-uploader
-    - omar-turbine-server
-    - omar-zipkin-server   
-* Incorporated SQS stager pause and restart into blue/green toggling (available in Jenkins pipeline)
-* Added profile-specific (dev|stage|prod) deployment files specifying the replication count for each service deployment.
+- 2CMV FSG products are now supported and searchable in OC2S
 
 ### OMAR-WFS
-* WFS calls are changed based on map zoom levels to make them more efficient.
+- Updated WFS to parse filter request and retrieve specific filter fields (country code, mission ID, etc).
+- Logged WFS filter keywords as JSON array so that each entry is considered an individual and unique value.
 
+### OMAR-SQS-STAGER
+- Added new endpoints to omar-sqs-stager. pause, stop, start, isPasued, isProcessing, isProcessingJobs
+- Remaining images are now included in the logs
 
 ## Guides
