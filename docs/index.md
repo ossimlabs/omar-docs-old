@@ -17,7 +17,7 @@ In no particular order, here are the major new and updated features provided in 
 - Logged WFS filter keywords as JSON array so that each entry is considered an individual and unique value.
 
 ### OMAR-SQS-STAGER
-- Added new endpoints to oamr-sqs-stager. pause, stop, start, isPasued, isProcessing, isProcessingJobs
-- Remaining images are now included in the
+- Added new endpoints to omar-sqs-stager. pause, stop, start, isPasued, isProcessing, isProcessingJobs
+- Remaining images are now included in the logs
 
 ## Guides
