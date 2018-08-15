@@ -7,7 +7,6 @@ buildscript {
     dockerFile="docker/Dockerfile"
     dockerStatementsOverride = {[
         "FROM ${project.dockerNamespaceUrl}${project.ext.baseImage}:${project.dockerAppTag}",
-        "MAINTAINER DigitalGlobe-RadiantBlue",
         "ENV HOME=/home/omar",
         "USER root",
         "ADD ./yum.repos.d/* /etc/yum.repos.d/",
