@@ -4,7 +4,7 @@ These docs serve as a guide for installing and running an individual service. It
 
 ## Release Notes
 
-Chipping speed is now improved
+* Chipping speed is now improved
 
 All old indices have been migrated to the new version of elastic search
 
