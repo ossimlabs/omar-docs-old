@@ -7,7 +7,6 @@ buildscript {
     dockerFile="docker/Dockerfile"
     dockerStatementsOverride = {[
         "FROM ${project.dockerNamespaceUrl}${project.ext.baseImage}:${project.dockerAppTag}",
-        "MAINTAINER DigitalGlobe-RadiantBlue",
         "ENV HOME=/home/omar",
         "USER root",
         "ADD ./yum.repos.d/* /etc/yum.repos.d/",
@@ -58,13 +57,11 @@ buildscript {
     apply from: System.env.OMAR_COMMON_PROPERTIES
   }
   repositories {
+    mavenLocal()
     maven { url "${ossimMavenProxy}" }
-    if( !System.env.WWW_CONNECTED || Boolean.parseBoolean( System.env.WWW_CONNECTED ) ) {
-        mavenLocal()
-    }
   }
   dependencies {
-        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:latest.release"
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.7.5"
   }
 }
 
@@ -76,9 +73,9 @@ group "io.ossim.omar.apps"
 
 
 repositories {
+  mavenLocal()
   maven { url "${ossimMavenProxy}" }
   if( !System.env.WWW_CONNECTED || Boolean.parseBoolean( System.env.WWW_CONNECTED ) ) {
-    mavenLocal()
     mavenCentral()
   }
 }

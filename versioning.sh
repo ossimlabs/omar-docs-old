@@ -3,7 +3,7 @@
 
 pushd docs
 
-ARTIFACTORY_URL="http://artifactory.ossim.io/artifactory/omar-local/io/ossim/omar/apps"
+REPOSITORY_MANAGER_URL="https://nexus.ossim.io/content/repositories/ossim-deps/io/ossim/omar/apps"
 
 for repo in ${REPOS[@]} ; do
     VERSION=""
