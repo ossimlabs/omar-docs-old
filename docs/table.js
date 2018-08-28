@@ -3,7 +3,7 @@ $( document ).ready( function() {
         function( index, row ) {
             var column = $( row ).children()[ 0 ];
             if ( index % 2 == 0 ) {
-                var app = $( column ).clone().children().remove().end().text();
+                var app = $( column ).text();
 
                 var url = "/" + app + "/api";
                 $.ajax({
