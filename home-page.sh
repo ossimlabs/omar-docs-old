@@ -30,7 +30,7 @@ for repo in ${REPOS[@]} ; do
         fi
     done
 
-    echo "| ... |" >> index.md
+    echo "|  |" >> index.md
 
 
     # Search for a description in the app's README
