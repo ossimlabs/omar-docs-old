@@ -6,4 +6,16 @@ These docs serve as a guide for installing and running an individual service. It
 
 * Added omar-services-monitor
 
+## omar-avro-metadata
+
+* Swagger page now available
+
+## omar-frontend-tests
+
+* All tests hardened. Video recordings provided for frontend tests
+
+## omar-wms
+
+* WMS now logs the midpoint location of requests for every request
+
 ## Guides
