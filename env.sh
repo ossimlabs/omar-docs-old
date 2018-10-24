@@ -7,6 +7,7 @@ export GUIDES=(
 
 export REPOS=(
 	"$GIT_PRIVATE_SERVER_URL/isa-ui.git"
+	"$GIT_PRIVATE_SERVER_URL/ossim-isa.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-admin-server.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-avro-metadata.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-base.git"
@@ -21,10 +22,12 @@ export REPOS=(
 	"$GIT_PUBLIC_SERVER_URL/omar-mensa.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-oms.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-ossim-base.git"
+	"$GIT_PUBLIC_SERVER_URL/omar-scdf-indexer.git"
+	"$GIT_PUBLIC_SERVER_URL/omar-scdf-s3-source.git"
+	"$GIT_PUBLIC_SERVER_URL/omar-scdf-stager.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-sqs-stager.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-stager.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-superoverlay.git"
-	"$GIT_PUBLIC_SERVER_URL/tlv.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-twofishes.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-ui.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-wcs.git"
@@ -32,9 +35,6 @@ export REPOS=(
 	"$GIT_PUBLIC_SERVER_URL/omar-wfs.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-wms.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-wmts.git"
-	"$GIT_PUBLIC_SERVER_URL/omar-scdf-s3-source.git"
-	"$GIT_PUBLIC_SERVER_URL/omar-scdf-stager.git"
-	"$GIT_PUBLIC_SERVER_URL/omar-scdf-indexer.git"
-	"$GIT_PRIVATE_SERVER_URL/ossim-isa.git"
 	"$GIT_PUBLIC_SERVER_URL/rhel-minimal.git"
+	"$GIT_PUBLIC_SERVER_URL/tlv.git"
 )
