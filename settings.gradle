@@ -1,8 +1,3 @@
-def final O2_DEV_HOME = System.getenv('O2_DEV_HOME')
+include 'omar-docs-app'
 
-if ( O2_DEV_HOME ) {
-
-   include 'omar-docs-app'
-
-   project(':omar-docs-app').projectDir = "${O2_DEV_HOME}/omar-docs/apps/omar-docs-app" as File
-}
+project(':omar-docs-app').projectDir = "${rootProject.projectDir}/apps/omar-docs-app" as File
