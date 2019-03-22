@@ -66,6 +66,7 @@ buildscript {
 }
 
 apply plugin: "java"
+apply plugin: "maven-publish"
 apply plugin: "maven"
 
 group "io.ossim.omar.apps"
