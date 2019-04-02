@@ -9,7 +9,7 @@ buildscript {
         "FROM ${project.dockerNamespaceUrl}${project.ext.baseImage}:${project.dockerAppTag}",
         "ENV HOME=/home/omar",
         "USER root",
-        "ADD ./yum.repos.d/* /etc/yum.repos.d/",
+        //"ADD ./yum.repos.d/* /etc/yum.repos.d/",
         "RUN mkdir -p \${HOME}",
         "RUN yum --disablerepo=centos* -y install hostname httpd gettext",
         "RUN yum -y install nss_wrapper",
