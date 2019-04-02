@@ -6,7 +6,6 @@ export GUIDES=(
 )
 
 export REPOS=(
-	"$GIT_PRIVATE_SERVER_URL/ossim-isa.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-admin-server.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-avro-metadata.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-base.git"
