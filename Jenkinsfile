@@ -42,6 +42,7 @@ node( "${ BUILD_NODE }" ) {
             sh """
                 ./mkdocs.sh
                 tar cfz docs.tgz site
+                mv docs.tgz ./docker
                 ls -alh
                 gradle pushDockerImage -PossimMavenProxy=${OSSIM_MAVEN_PROXY}
             """
