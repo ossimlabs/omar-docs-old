@@ -31,7 +31,7 @@ node( "${ BUILD_NODE }" ) {
     stage ( "Assemble" ) {
         sh """
             ./mkdocs.sh
-            tar cvfz docs.tgz site
+            tar cfz docs.tgz site
         """
         archiveArtifacts "docs.tgz"
     }

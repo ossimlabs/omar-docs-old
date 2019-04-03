@@ -79,11 +79,16 @@ repositories {
 }
 
 dependencies {
-  compile 'org.codehaus.groovy:groovy-all:2.4.7'
-  compile 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1'
-  compile 'org.postgresql:postgresql:9.4-1205-jdbc42'
+    compile 'io.ossim.omar.plugins:omar-core-plugin:+'
 }
 
+//io.ossim.gradleDefaults.Variables.setAdditionalVariables( project )
+//io.ossim.gradleDefaults.Variables.setVersionVariables(project)
+//dockerBuildDir="${rootProject.projectDir}/docker"
+//version "${buildVersion}-${buildVersionTag}"
+//jarDestination = "${projectDir}/build/libs/${project.name}-${version}.jar"
+//io.ossim.gradleDefaults.Docker.addDockerTasks(project, dockerRegistryUrl, dockerRegistryUsername, dockerRegistryPassword, name, dockerImageTag, dockerBuildDir, jarDestination, ["BASE_IMAGE": "${dockerRegistryUrl}/${dockerBaseImage}:${dockerFromTag}"])
+//io.ossim.gradleDefaults.Openshift.addOpenshiftTasks(project, openshiftUrl, openshiftUsername, openshiftPassword, openshiftProjectName, openshiftServiceName,  dockerRegistryUrl, name, dockerImageTag)
 
 publishing {
   publications {
