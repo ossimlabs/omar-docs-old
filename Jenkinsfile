@@ -49,4 +49,26 @@ node( "${ BUILD_NODE }" ) {
             """
         }
     }
+
+    try {
+        stage ( "OpenShift Tag Image" ) {
+            withCredentials([[
+                $class: 'UsernamePasswordMultiBinding',
+                credentialsId: 'openshiftCredentials',
+                usernameVariable: 'OPENSHIFT_USERNAME',
+                passwordVariable: 'OPENSHIFT_PASSWORD'
+            ]]) {
+                sh """
+                    gradle openshiftTagImage -PossimMavenProxy=${OSSIM_MAVEN_PROXY}
+                """
+            }
+        }
+    } catch ( e ) {
+        echo e.toString()
+    }
+
+    stage( "Clean Workspace" ) {
+        if ( "${ CLEAN_WORKSPACE }" == "true" )
+            step([ $class: 'WsCleanup' ])
+    }
 }
