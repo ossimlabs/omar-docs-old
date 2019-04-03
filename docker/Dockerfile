@@ -10,7 +10,7 @@ RUN sed '/^omar/d' /etc/passwd > $HOME/passwd-template && \
     setcap cap_net_bind_service+ep /usr/sbin/httpd && \
     setcap cap_net_bind_service+ep /usr/sbin/apachectl
 RUN echo 'Alias "/omar-docs" "/var/www/html"' >> /etc/httpd/conf.d/docs.conf
-COPY docs.tgz /var/www/html/
+COPY ../docs.tgz /var/www/html/
 WORKDIR  /var/www/html
 RUN tar xfz docs.tgz && \
     mv ./site/* . &&\
