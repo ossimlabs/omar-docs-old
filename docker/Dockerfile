@@ -27,16 +27,16 @@ RUN chown 1001:0 /run/httpd
 RUN chown 1001:0 /var/log/httpd
 RUN chmod 770 /var/log/httpd
 RUN chmod g+s /var/run/httpd
-RUN find /usr/share/httpd -type d -exec chmod g+xws {} \\;
-RUN find /usr/share/httpd -type f -exec chmod g+rw {} \\;
-RUN find /etc/httpd -type d -exec chmod g+rw {} \\;
-RUN find /etc/pki -type d -exec chmod g+xws {} \\;
-RUN find /etc/pki -type f -exec chmod g+rw {} \\;
+RUN find /usr/share/httpd -type d -exec chmod g+xws {} \;
+RUN find /usr/share/httpd -type f -exec chmod g+rw {} \;
+RUN find /etc/httpd -type d -exec chmod g+rw {} \;
+RUN find /etc/pki -type d -exec chmod g+xws {} \;
+RUN find /etc/pki -type f -exec chmod g+rw {} \;
 RUN chown -R 1001:0 /usr/share/httpd
 RUN chown -R 1001:0 /etc/httpd
 RUN chown -R 1001:0 /etc/pki
-RUN find $HOME -type d -exec chmod g+xws {} \\;
-RUN find $HOME -type f -exec chmod g+rw {} \\;
+RUN find $HOME -type d -exec chmod g+xws {} \;
+RUN find $HOME -type f -exec chmod g+rw {} \;
 RUN chown -R 1001:0 $HOME
 RUN chmod 770 $HOME/*.sh
 RUN chown -R 1001:0 $HOME
