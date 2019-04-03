@@ -29,7 +29,11 @@ node( "${ BUILD_NODE }" ) {
     }
 
     stage ( "Assemble" ) {
-
+        sh """
+            ./mkdocs.sh
+            tar cfz docs.tgz site
+        """
+        archiveArtifacts "docs.tgz"
     }
 
     stage ("Publish Docker App") {
@@ -40,10 +44,7 @@ node( "${ BUILD_NODE }" ) {
             passwordVariable: 'DOCKER_REGISTRY_PASSWORD'
         ]]) {
             sh """
-                ./mkdocs.sh
-                tar cfz docs.tgz site
                 mv docs.tgz ./docker
-                ls -alh
                 gradle pushDockerImage -PossimMavenProxy=${OSSIM_MAVEN_PROXY}
             """
         }
