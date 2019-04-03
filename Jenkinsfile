@@ -40,6 +40,7 @@ node( "${ BUILD_NODE }" ) {
             passwordVariable: 'DOCKER_REGISTRY_PASSWORD'
         ]]) {
             sh """
+                ./mkdocs.sh
                 tar cfz docs.tgz site
                 gradle pushDockerImage -PossimMavenProxy=${OSSIM_MAVEN_PROXY}
             """
