@@ -35,4 +35,17 @@ node( "${ BUILD_NODE }" ) {
         """
         archiveArtifacts "docs.tgz"
     }
+
+    stage ("Publish Docker App") {
+        withCredentials([[
+            $class: 'UsernamePasswordMultiBinding',
+            credentialsId: 'dockerCredentials',
+            usernameVariable: 'DOCKER_REGISTRY_USERNAME',
+            passwordVariable: 'DOCKER_REGISTRY_PASSWORD'
+        ]]) {
+            sh """
+                gradle pushDockerImage -PossimMavenProxy=${OSSIM_MAVEN_PROXY}
+            """
+        }
+    }
 }
