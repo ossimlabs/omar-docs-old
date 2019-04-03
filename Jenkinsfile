@@ -44,7 +44,8 @@ node( "${ BUILD_NODE }" ) {
             passwordVariable: 'DOCKER_REGISTRY_PASSWORD'
         ]]) {
             sh """
-                gradle pushDockerImage -PossimMavenProxy=${OSSIM_MAVEN_PROXY}
+gradle tasks
+                #gradle pushDockerImage -PossimMavenProxy=${OSSIM_MAVEN_PROXY}
             """
         }
     }
