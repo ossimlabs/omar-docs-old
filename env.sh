@@ -6,7 +6,6 @@ export GUIDES=(
 )
 
 export REPOS=(
-	"$GIT_PRIVATE_SERVER_URL/ossim-isa.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-admin-server.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-avro-metadata.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-base.git"
@@ -16,14 +15,10 @@ export REPOS=(
 	"$GIT_PUBLIC_SERVER_URL/omar-download.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-eureka-server.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-geoscript.git"
-	"$GIT_PUBLIC_SERVER_URL/omar-jpip.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-mapproxy.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-mensa.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-oms.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-ossim-base.git"
-	"$GIT_PUBLIC_SERVER_URL/omar-scdf-indexer.git"
-	"$GIT_PUBLIC_SERVER_URL/omar-scdf-s3-source.git"
-	"$GIT_PUBLIC_SERVER_URL/omar-scdf-stager.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-sqs-stager.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-stager.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-superoverlay.git"
