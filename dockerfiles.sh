@@ -1,6 +1,8 @@
 #! /bin/bash
 . functions.sh
 
+pushd docs
+
 for repo in ${REPOS[@]} ; do
     app=`echo $repo | sed -n 's/.*[/]\(.*\).git$/\1/p'`
 
