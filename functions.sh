@@ -5,7 +5,7 @@
 #
 function getRepoVersion {
     REPO=$2
-	
+ls $REPO	
     echo "Checking in $REPO for gradle.properties files..."
     for x in `find $REPO -name gradle.properties | head -1`; do
 	echo "$x"
