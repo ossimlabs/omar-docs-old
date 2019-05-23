@@ -5,10 +5,9 @@
 #
 function getRepoVersion {
     REPO=$2
-ls $REPO	
-    echo "Checking in $REPO for gradle.properties files..."
-    for x in `find $REPO -name gradle.properties | head -1`; do
-	echo "$x"
+
+    GRADLE_PROPERTIES=$REPO/gradle.properties
+    if [ -e $GRADLE_PROPERTIES ]; then
         eval $1=`grep buildVersion $x | awk -F "=" '{print $2}'`
-    done
+    fi
 }
