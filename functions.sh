@@ -6,7 +6,8 @@
 function getRepoVersion {
     REPO=$2
 
-    for x in `find $REPO -name gradle.properties | head -1`; do
+    GRADLE_PROPERTIES=$REPO/gradle.properties
+    if [ -e $GRADLE_PROPERTIES ]; then
         eval $1=`grep buildVersion $x | awk -F "=" '{print $2}'`
-    done
+    fi
 }

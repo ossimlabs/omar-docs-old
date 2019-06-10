@@ -16,9 +16,11 @@ for repo in ${REPOS[@]} ; do
     echo -n "| **$app** " >> index.md
 
     if [ "$REPO_VERSION" != "" ] ; then
+	echo "Version found: $REPO_VERSION"
         echo -n "| v${REPO_VERSION} " >> index.md
     else
-       echo -n "| " >> index.md
+	echo "Version not found."
+        echo -n "| " >> index.md
     fi
 
     for guide in ${GUIDES[@]} ; do
