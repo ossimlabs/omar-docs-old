@@ -9,6 +9,8 @@ for repo in ${REPOS[@]} ; do
     if [ -e $GUIDE ]; then
         echo "" >> $GUIDE # make sure you start on a new line
         echo "## Source Code" >> $GUIDE
-        echo "[https://$repo](https://$repo)" >> $GUIDE
+        URL="${repo/://}"
+        URL="${URL/git@/https://}"
+        echo "[$URL]($URL)" >> $GUIDE
     fi
 done

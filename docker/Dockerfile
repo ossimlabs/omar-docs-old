@@ -3,7 +3,9 @@ FROM ${BASE_IMAGE}
 ENV HOME=/home/omar
 USER root
 RUN mkdir -p $HOME
-RUN yum --disablerepo=centos* -y install hostname httpd gettext
+RUN yum --disablerepo=centos* -y install hostname
+RUN yum --disablerepo=centos* -y install httpd
+RUN yum --disablerepo=centos* -y install gettext
 RUN yum -y install nss_wrapper
 RUN yum clean all
 
