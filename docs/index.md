@@ -4,13 +4,7 @@ These docs serve as a guide for installing and running an individual service. It
 
 ## Release Notes
 
-## omar-wms
-* Sharpening can now be specified from 0.01 to 1.00
-
-## tlv
-* Sensors are now enumerated checkboxes
-* A "Last X Days" box is supplied for users to search from the end date a certain number of days
-* The ability to search for all FSG except certain values has been added
+NSTR
 
 
 ## Guides
