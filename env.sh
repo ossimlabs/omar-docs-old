@@ -25,7 +25,7 @@ export REPOS=(
 	"$GIT_PUBLIC_SERVER_URL/omar-superoverlay.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-twofishes.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-ui.git"
-	"$GIT_PUBLIC_SERVER_URL/omar-video-vrails.git"
+	"$GIT_PUBLIC_SERVER_URL/omar-video-ui.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-volume-cleanup.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-upload.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-wcs.git"
