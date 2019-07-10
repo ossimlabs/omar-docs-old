@@ -4,7 +4,7 @@
 
 mkdir deployment_configs
 
-oc login --insecure-skip-tls-verify https://openshift.ossim.io:8443 -u $OPENSHIFT_USERNAME -p $OPENSHIFT_PASSWORD
+#oc login --insecure-skip-tls-verify https://openshift.ossim.io:8443 -u $OPENSHIFT_USERNAME -p $OPENSHIFT_PASSWORD
 token=`oc whoami -t`
 curl -H "Authorization: Bearer $token" -k -L -o deployment_configs/deploymentConfigs.json https://openshift.ossim.io:8443/oapi/v1/namespaces/omar-dev/deploymentconfigs
 
