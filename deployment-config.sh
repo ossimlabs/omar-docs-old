@@ -13,8 +13,9 @@ pushd deployment_configs
 
 for repo in ${REPOS[@]} ; do
     app=`echo $repo | sed -n 's/.*[/]\(.*\).git$/\1/p'`
-
+    echo "Current App is $app"
     for deploymentConfig in `ls`; do
+        echo "Current Deployment Config is $deploymentConfig"
         if [[ $deploymentConfig == *"$app"* ]]; then
             GUIDE=$SCRIPT_DIR/docs/$app/docs/install-guide/$app.md
             echo "Found deploymentConfig for $app"
