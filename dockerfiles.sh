@@ -7,8 +7,8 @@ for repo in ${REPOS[@]} ; do
     app=`echo $repo | sed -n 's/.*[/]\(.*\).git$/\1/p'`
 
     DOCKERFILE=$app/docker/Dockerfile
-    
-    if [ ! -e $DOCKERFILE]; then
+
+    if [ ! -e $DOCKERFILE ]; then
         DOCKERFILE=$app/Dockerfile
     fi
 
