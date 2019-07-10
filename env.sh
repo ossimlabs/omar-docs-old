@@ -20,7 +20,7 @@ export REPOS=(
 	"$GIT_PUBLIC_SERVER_URL/omar-oms.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-ossim-base.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-reachback.git"
-	"$GIT_PUBLIC_SERVER_URL/omar-services-monitor"
+	"$GIT_PUBLIC_SERVER_URL/omar-services-monitor.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-sqs-stager.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-stager.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-superoverlay.git"
