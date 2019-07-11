@@ -17,6 +17,11 @@ for repo in ${REPOS[@]} ; do
     if [[ $app == "omar-base" ]]; then
         continue
     fi
+
+    if [[ $app == "omar-config-server" ]]; then
+        continue
+    fi
+    
     echo "Current App is $app"
 
     for deploymentConfig in `ls`; do
