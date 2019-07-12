@@ -11,8 +11,6 @@ groovy json2yml.groovy
 
 pushd deployment_configs
 
-cat deploymentConfigs.json
-
 for repo in ${REPOS[@]} ; do
     app=`echo $repo | sed -n 's/.*[/]\(.*\).git$/\1/p'`
 
