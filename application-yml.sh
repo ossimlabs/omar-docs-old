@@ -6,6 +6,10 @@ for repo in ${REPOS[@]} ; do
 
     app=`echo $repo | sed -n 's/.*[/]\(.*\).git$/\1/p'`
 
+    if [[ $app == "o2-pushbutton" ]]; then
+        continue
+    fi
+
     # only take the first application.yml
     # sometimes the plugin directory will have one as well
     CONF_FILE=`find $SCRIPT_DIR/docs/$app -name "application.yml" | head -1`
