@@ -1,7 +1,6 @@
 #! /bin/bash
 . functions.sh
 
-
 mkdir deployment_configs
 
 token=`oc whoami -t`
@@ -23,7 +22,6 @@ for repo in ${REPOS[@]} ; do
     fi
     
     echo "Current App is $app"
-
     for deploymentConfig in `ls`; do
         echo "Current Deployment Config is $deploymentConfig"
         if [[ $deploymentConfig == *"$app"* ]]; then
