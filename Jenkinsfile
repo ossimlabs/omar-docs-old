@@ -30,10 +30,17 @@ node( "${ BUILD_NODE }" ) {
     }
 
     stage ( "Assemble" ) {
-        sh """
-            ./mkdocs.sh
-            tar cfz docs.tgz site
-        """
+        withCredentials([[
+            $class: 'UsernamePasswordMultiBinding',
+            credentialsId: 'openshiftCredentials',
+            usernameVariable: 'OPENSHIFT_USERNAME',
+            passwordVariable: 'OPENSHIFT_PASSWORD'
+        ]]) {
+            sh """
+                ./mkdocs.sh
+                tar cfz docs.tgz site
+            """
+        }
         archiveArtifacts "docs.tgz"
     }
 

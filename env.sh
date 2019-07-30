@@ -6,6 +6,7 @@ export GUIDES=(
 )
 
 export REPOS=(
+	"$GIT_PUBLIC_SERVER_URL/o2-pushbutton.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-admin-server.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-avro-metadata.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-base.git"
@@ -20,14 +21,15 @@ export REPOS=(
 	"$GIT_PUBLIC_SERVER_URL/omar-oms.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-ossim-base.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-reachback.git"
+	"$GIT_PUBLIC_SERVER_URL/omar-services-monitor.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-sqs-stager.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-stager.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-superoverlay.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-twofishes.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-ui.git"
-	"$GIT_PUBLIC_SERVER_URL/omar-video-vrails.git"
-	"$GIT_PUBLIC_SERVER_URL/omar-volume-cleanup.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-upload.git"
+	"$GIT_PUBLIC_SERVER_URL/omar-video-ui.git"
+	"$GIT_PUBLIC_SERVER_URL/omar-volume-cleanup.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-wcs.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-web-proxy.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-wfs.git"
