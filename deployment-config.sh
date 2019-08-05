@@ -20,13 +20,21 @@ for repo in ${REPOS[@]} ; do
     if [[ $app == "omar-config-server" ]]; then
         continue
     fi
+
+    if [ -e $app/docsConfig.yml ]; then
+        create_variables $app/docsConfig.yml
+    fi
     
     echo "Current App is $app"
     for deploymentConfig in `ls`; do
         echo "Current Deployment Config is $deploymentConfig"
         if [[ $deploymentConfig == *"$app"* ]]; then
             echo "Found deploymentConfig for $app"
-            GUIDE=$SCRIPT_DIR/docs/$app/docs/install-guide/$app.md
+            if [ -z "$app_installGuide" ]; then
+                GUIDE=$app_installGuide
+            else
+                GUIDE=$SCRIPT_DIR/docs/$app/docs/install-guide/$app.md
+            fi
             # only modify the guide if it exists and a deployment config exists
             if [ -e $GUIDE ]; then
                 echo "Found match for $app"
@@ -39,6 +47,7 @@ for repo in ${REPOS[@]} ; do
             fi
         fi
     done
+    unset_vars
 done
 
 popd

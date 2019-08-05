@@ -4,7 +4,16 @@
 for repo in ${REPOS[@]} ; do
     app=`echo $repo | sed -n 's/.*[/]\(.*\).git$/\1/p'`
 
-    GUIDE=$SCRIPT_DIR/docs/$app/docs/install-guide/$app.md
+    if [ -e $app/docsConfig.yml ]; then
+        create_variables $app/docsConfig.yml
+    fi
+
+    if [ -z "$app_installGuide" ]; then
+        GUIDE=$app_installGuide
+    else
+        GUIDE=$SCRIPT_DIR/docs/$app/docs/install-guide/$app.md
+    fi
+
     # only modify the guide if it exists
     if [ -e $GUIDE ]; then
         echo "" >> $GUIDE # make sure you start on a new line
@@ -13,4 +22,5 @@ for repo in ${REPOS[@]} ; do
         URL="${URL/git@/https://}"
         echo "[$URL]($URL)" >> $GUIDE
     fi
+    unset_vars
 done

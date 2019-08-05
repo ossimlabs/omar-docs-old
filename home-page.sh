@@ -23,12 +23,25 @@ for repo in ${REPOS[@]} ; do
         echo -n "| " >> index.md
     fi
 
+    if [ -e $app/docsConfig.yml ]; then
+        create_variables $app/docsConfig.yml
+    fi
+
     for guide in ${GUIDES[@]} ; do
         echo -n "| " >> index.md
-        GUIDE=$app/docs/$guide/$app.md
+
+        if [ $guide == "install-guide" && -z "$app_installGuide" ]; then
+            GUIDE=$app_installGuide
+        elif [ $guide == "user-guide" && -z "$app_userGuide" ]; then
+            GUIDE=$app_userGuide
+        else
+            GUIDE=$app/docs/$guide/$app.md
+        fi
+
         if [ -e $SCRIPT_DIR/docs/$GUIDE ]; then
+            LINK=`echo "$GUIDE" | cut -f 1 -d '.'`
             echo "Found $GUIDE..."
-            echo -n "[$guide]($app/docs/$guide/$app/) " >> index.md
+            echo -n "[$guide]($LINK) " >> index.md
         fi
     done
 
@@ -50,6 +63,8 @@ for repo in ${REPOS[@]} ; do
         echo "Description not available because no README is found."
         echo "| Description not available. |" >> index.md
     fi
+
+    unset_vars
 done
 
 popd
