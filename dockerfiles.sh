@@ -20,6 +20,8 @@ for repo in ${REPOS[@]} ; do
         DOCKERFILE=$app/Dockerfile
     fi
 
+    echo "Found Dockerfile: $DOCKERFILE"
+
     if [ -e $DOCKERFILE ]; then
         if [ ! -z "$app_installGuide" ]; then
             GUIDE=$SCRIPT_DIR/docs/$app/$app_installGuide
