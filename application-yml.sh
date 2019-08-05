@@ -22,8 +22,6 @@ for repo in ${REPOS[@]} ; do
         CONF_FILE=`find $SCRIPT_DIR/docs/$app -name "application.yml" | head -1`
     fi
 
-    echo "Found CONF_FILE: $CONF_FILE"
-
     if [ ! -z "$app_installGuide" ]; then
         INSTALL_GUIDE=$SCRIPT_DIR/docs/$app/$app_installGuide
     else
