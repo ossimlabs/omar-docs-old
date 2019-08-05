@@ -16,14 +16,14 @@ for repo in ${REPOS[@]} ; do
 
     # only take the first application.yml
     # sometimes the plugin directory will have one as well
-    if [ -z "$app_applicationFile" ]; then
-        CONF_FILE=$app_applicationFile
+    if [ ! -z "$app_applicationFile" ]; then
+        CONF_FILE=$SCRIPT_DIR/docs/$app/$app_applicationFile
     else
         CONF_FILE=`find $SCRIPT_DIR/docs/$app -name "application.yml" | head -1`
     fi
 
-    if [ -z "$app_installGuide" ]; then
-        INSTALL_GUIDE=$app_installGuide
+    if [ ! -z "$app_installGuide" ]; then
+        INSTALL_GUIDE=$SCRIPT_DIR/docs/$app/$app_installGuide
     else
         INSTALL_GUIDE=$SCRIPT_DIR/docs/$app/docs/install-guide/$app.md
     fi

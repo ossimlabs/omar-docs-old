@@ -30,10 +30,10 @@ for repo in ${REPOS[@]} ; do
     for guide in ${GUIDES[@]} ; do
         echo -n "| " >> index.md
 
-        if [ $guide == "install-guide" ] && [ -z "$app_installGuide" ]; then
-            GUIDE=$app_installGuide
-        elif [ $guide == "user-guide" ] && [ -z "$app_userGuide" ]; then
-            GUIDE=$app_userGuide
+        if [ $guide == "install-guide" ] && [ ! -z "$app_installGuide" ]; then
+            GUIDE=$app/$app_installGuide
+        elif [ $guide == "user-guide" ] && [ ! -z "$app_userGuide" ]; then
+            GUIDE=$app/$app_userGuide
         else
             GUIDE=$app/docs/$guide/$app.md
         fi

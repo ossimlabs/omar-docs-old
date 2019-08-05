@@ -10,7 +10,7 @@ for repo in ${REPOS[@]} ; do
         create_variables $app/docsConfig.yml
     fi
 
-    if [ -z $app_dockerGuide ]; then
+    if [ ! -z $app_dockerGuide ]; then
         DOCKERFILE=$app/$app_dockerGuide
     else
         DOCKERFILE=$app/docker/Dockerfile
@@ -21,7 +21,7 @@ for repo in ${REPOS[@]} ; do
     fi
 
     if [ -e $DOCKERFILE ]; then
-        if [ -z "$app_installGuide" ]; then
+        if [ ! -z "$app_installGuide" ]; then
             GUIDE=$SCRIPT_DIR/docs/$app/$app_installGuide
         else
             GUIDE=$SCRIPT_DIR/docs/$app/docs/install-guide/$app.md

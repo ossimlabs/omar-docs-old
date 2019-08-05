@@ -21,8 +21,8 @@ for repo in ${REPOS[@]} ; do
         continue
     fi
 
-    if [ -e $app/docsConfig.yml ]; then
-        create_variables $app/docsConfig.yml
+    if [ -e $SCRIPT_DIR/docs/$app/docsConfig.yml ]; then
+        create_variables $SCRIPT_DIR/docs/$app/docsConfig.yml
     fi
     
     echo "Current App is $app"
@@ -30,7 +30,7 @@ for repo in ${REPOS[@]} ; do
         echo "Current Deployment Config is $deploymentConfig"
         if [[ $deploymentConfig == *"$app"* ]]; then
             echo "Found deploymentConfig for $app"
-            if [ -z "$app_installGuide" ]; then
+            if [ ! -z "$app_installGuide" ]; then
                 GUIDE=$SCRIPT_DIR/docs/$app/$app_installGuide
             else
                 GUIDE=$SCRIPT_DIR/docs/$app/docs/install-guide/$app.md

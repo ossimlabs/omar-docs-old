@@ -8,7 +8,7 @@ for repo in ${REPOS[@]} ; do
         create_variables $app/docsConfig.yml
     fi
 
-    if [ -z "$app_installGuide" ]; then
+    if [ ! -z "$app_installGuide" ]; then
         GUIDE=$SCRIPT_DIR/docs/$app/$app_installGuide
     else
         GUIDE=$SCRIPT_DIR/docs/$app/docs/install-guide/$app.md

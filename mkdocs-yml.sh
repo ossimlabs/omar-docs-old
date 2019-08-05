@@ -17,9 +17,9 @@ for guide in ${GUIDES[@]} ; do
             create_variables $app/docsConfig.yml
         fi
 
-        if [ $guide == "install-guide" ] && [ -z "$app_installGuide" ]; then
+        if [ $guide == "install-guide" ] && [ ! -z "$app_installGuide" ]; then
             GUIDE=$app/$app_installGuide
-        elif [ $guide == "user-guide" ] && [ -z "$app_userGuide" ]; then
+        elif [ $guide == "user-guide" ] && [ ! -z "$app_userGuide" ]; then
             GUIDE=$app/$app_userGuide
         else
             GUIDE=$app/docs/$guide/$app.md
