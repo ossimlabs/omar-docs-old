@@ -6,15 +6,16 @@ popd >/dev/null
 
 # get a list of all the apps that have documentation
 source $SCRIPT_DIR/env.sh
-
 source $SCRIPT_DIR/checkout.sh
-source $SCRIPT_DIR/home-page.sh
-source $SCRIPT_DIR/application-yml.sh
-source $SCRIPT_DIR/deployment-config.sh
-source $SCRIPT_DIR/dockerfiles.sh
-source $SCRIPT_DIR/source-code.sh
-#source $SCRIPT_DIR/versioning.sh
-source $SCRIPT_DIR/mkdocs-yml.sh
+
+mkdir deployment_configs
+
+token=`oc whoami -t`
+curl -H "Authorization: Bearer $token" -k -L -o deployment_configs/deploymentConfigs.json https://openshift.ossim.io:8443/oapi/v1/namespaces/omar-dev/deploymentconfigs
+
+groovy json2yml.groovy
+
+python3 create-files.py
 
 # remove any existing stylesheets
 find . -name "*.css" -type f -delete

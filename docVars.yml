@@ -1,0 +1,37 @@
+---
+guides:
+  - install-guide
+  - user-guide
+
+apps:
+  - o2-pushbutton
+  - omar-admin-server
+  - omar-avro-metadata
+  - omar-base
+  - omar-basemap
+  - omar-config-server
+  - omar-download
+  - omar-eureka-server
+  - omar-geoscript
+  - omar-mapproxy
+  - omar-mensa
+  - omar-nifi
+  - omar-oms
+  - omar-ossim-base
+  - omar-reachback
+  - omar-services-monitor
+  - omar-sqs-stager
+  - omar-stager
+  - omar-superoverlay
+  - omar-twofishes
+  - omar-ui
+  - omar-upload
+  - omar-video-ui
+  - omar-volume-cleanup
+  - omar-wcs
+  - omar-web-proxy
+  - omar-wfs
+  - omar-wms
+  - omar-wmts
+  - rhel-minimal
+  - tlv

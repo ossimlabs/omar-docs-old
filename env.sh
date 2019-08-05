@@ -1,10 +1,5 @@
 #! /bin/bash
 
-export GUIDES=(
-    "install-guide"
-    "user-guide"
-)
-
 export REPOS=(
 	"$GIT_PUBLIC_SERVER_URL/o2-pushbutton.git"
 	"$GIT_PUBLIC_SERVER_URL/omar-admin-server.git"
