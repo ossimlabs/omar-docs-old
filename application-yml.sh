@@ -10,7 +10,7 @@ for repo in ${REPOS[@]} ; do
         continue
     fi
 
-    if [ -e $app/docsConfig.yml ]; then
+    if [ -e $SCRIPT_DIR/docs/$app/docsConfig.yml ]; then
         create_variables $app/docsConfig.yml
     fi
 

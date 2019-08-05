@@ -12,7 +12,7 @@ function getRepoVersion {
     fi
 }
 
-parse_yaml() {
+function parse_yaml {
     local yaml_file=$1
     local prefix=$2
     local s
@@ -55,14 +55,14 @@ parse_yaml() {
     ) < "$yaml_file"
 }
 
-unset_vars() {
+function unset_vars {
     unset app_applicationFile
     unset app_dockerGuide
     unset app_installGuide
     unset app_userGuide
 }
 
-create_variables() {
+function create_variables {
     local yaml_file="$1"
     local prefix="$2"
     eval "$(parse_yaml "$yaml_file" "$prefix")"

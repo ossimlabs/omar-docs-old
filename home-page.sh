@@ -23,16 +23,16 @@ for repo in ${REPOS[@]} ; do
         echo -n "| " >> index.md
     fi
 
-    if [ -e $app/docsConfig.yml ]; then
+    if [ -e $SCRIPT_DIR/docs/$app/docsConfig.yml ]; then
         create_variables $app/docsConfig.yml
     fi
 
     for guide in ${GUIDES[@]} ; do
         echo -n "| " >> index.md
 
-        if [ $guide == "install-guide" && -z "$app_installGuide" ]; then
+        if [ $guide == "install-guide" ] && [ -z "$app_installGuide" ]; then
             GUIDE=$app_installGuide
-        elif [ $guide == "user-guide" && -z "$app_userGuide" ]; then
+        elif [ $guide == "user-guide" ] && [ -z "$app_userGuide" ]; then
             GUIDE=$app_userGuide
         else
             GUIDE=$app/docs/$guide/$app.md

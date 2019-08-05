@@ -13,14 +13,14 @@ for guide in ${GUIDES[@]} ; do
 
         app=`echo $repo | sed -n 's/.*[/]\(.*\).git$/\1/p'`
 
-        if [ -e $app/docsConfig.yml ]; then
+        if [ -e $SCRIPT_DIR/docs/$app/docsConfig.yml ]; then
             create_variables $app/docsConfig.yml
         fi
 
-        if [ $guide == "install-guide" && -z "$app_installGuide" ]; then
-            GUIDE=$app_installGuide
-        elif [ $guide == "user-guide" && -z "$app_userGuide" ]; then
-            GUIDE=$app_userGuide
+        if [ $guide == "install-guide" ] && [ -z "$app_installGuide" ]; then
+            GUIDE=$app/$app_installGuide
+        elif [ $guide == "user-guide" ] && [ -z "$app_userGuide" ]; then
+            GUIDE=$app/$app_userGuide
         else
             GUIDE=$app/docs/$guide/$app.md
         fi

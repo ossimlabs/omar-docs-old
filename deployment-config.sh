@@ -31,7 +31,7 @@ for repo in ${REPOS[@]} ; do
         if [[ $deploymentConfig == *"$app"* ]]; then
             echo "Found deploymentConfig for $app"
             if [ -z "$app_installGuide" ]; then
-                GUIDE=$app_installGuide
+                GUIDE=$SCRIPT_DIR/docs/$app/$app_installGuide
             else
                 GUIDE=$SCRIPT_DIR/docs/$app/docs/install-guide/$app.md
             fi
