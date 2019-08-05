@@ -7,7 +7,7 @@ for repo in ${REPOS[@]} ; do
     app=`echo $repo | sed -n 's/.*[/]\(.*\).git$/\1/p'`
 
     if [ -e $SCRIPT_DIR/docs/$app/docsConfig.yml ]; then
-        create_variables $app/docsConfig.yml
+        create_variables $SCRIPT_DIR/docs/$app/docsConfig.yml
     fi
 
     if [ ! -z $app_dockerGuide ]; then
