@@ -41,7 +41,7 @@ for repo in ${REPOS[@]} ; do
         if [ -e $SCRIPT_DIR/docs/$GUIDE ]; then
             LINK=`echo "$GUIDE" | cut -f 1 -d '.'`
             echo "Found $GUIDE..."
-            echo -n "[$guide]($LINK) " >> index.md
+            echo -n "[$guide]($LINK/) " >> index.md
         fi
     done
 
