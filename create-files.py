@@ -43,8 +43,8 @@ def homePage(docVars, customPaths):
                 indexFile.write("[{}]({}/)".format(guide, LINK))
         
         indexFile.write("|  |\n")
-        
         README_PATH = app + "/README.md"
+
         if os.path.exists(README_PATH):
             appDescription = findDescriptionLine(README_PATH)
             if appDescription:
@@ -52,6 +52,9 @@ def homePage(docVars, customPaths):
             else:
                 print("Description not found in README.")
                 indexFile.write("| Description not available. |\n")
+        else:
+            indexFile.write("| Description not available. |\n")
+
     indexFile.close()
     os.chdir("..")
 
@@ -70,10 +73,7 @@ def applicationFiles(docVars, customPaths):
         GUIDE = getGuideFile(app, customPaths, "install-guide")
 
         if os.path.exists(GUIDE) and os.path.exists(CONFIG_FILE):
-            guideStream = open(GUIDE, 'a')
-            guideStream.write("\n\n## Application YML Configuration\n")
-            guideStream.close()
-            writeFileToGuide(GUIDE, CONFIG_FILE)
+            writeFileToGuide(GUIDE, CONFIG_FILE, "\n\n## Application YML Configuration\n")
 
     os.chdir("..")
 
@@ -93,10 +93,7 @@ def deploymentConfig(docVars, customPaths):
             if app in config:
                 CONFIG_PATH = "../deployment_configs/" + config
                 if os.path.exists(GUIDE) and os.path.exists(CONFIG_PATH):
-                    guideStream = open(GUIDE, 'a')
-                    guideStream.write("\n## Example OpenShift Deployment Config\n")
-                    guideStream.close()
-                    writeFileToGuide(GUIDE, CONFIG_PATH)
+                    writeFileToGuide(GUIDE, CONFIG_PATH, "\n## Example OpenShift Deployment Config\n")
 
     os.chdir("..")
 
@@ -115,10 +112,7 @@ def dockerFiles(docVars, customPaths):
         GUIDE = getGuideFile(app, customPaths, "install-guide")
 
         if os.path.exists(GUIDE) and os.path.exists(DOCKERFILE):
-            guideStream = open(GUIDE, 'a')
-            guideStream.write("\n## Dockerfile\n")
-            guideStream.close()
-            writeFileToGuide(GUIDE, DOCKERFILE)
+            writeFileToGuide(GUIDE, DOCKERFILE, "\n## Dockerfile\n")
 
     os.chdir("..")
 
@@ -179,18 +173,17 @@ def getGuideFile(app, customPaths, guide):
 
     return GUIDE
 
-def writeFileToGuide(GUIDE, filetoWrite):
+def writeFileToGuide(GUIDE, filetoWrite, header):
     print("Writing {} to {}".format(filetoWrite, GUIDE))
 
-    if os.path.exists(GUIDE):
-        guideFile = open(GUIDE, 'a')
+    guideFile = open(GUIDE, 'a')
+    guideFile.write(header + "```\n")
 
-        guideFile.write("```\n")
-        for line in open(filetoWrite, 'r'):
-            guideFile.write(line)
-        guideFile.write("```\n")
+    for line in open(filetoWrite, 'r'):
+        guideFile.write(line)
 
-        guideFile.close()
+    guideFile.write("```\n")
+    guideFile.close()
 
 def addRepoNames(docVars):
     docVars["repos"] = list()

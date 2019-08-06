@@ -1,13 +1,6 @@
 #! /bin/bash
 
-#pushd `dirname ${BASH_SOURCE[0]}` >/dev/null
-#export SCRIPT_DIR=`pwd -P`
-#popd >/dev/null
-
-# get a list of all the apps that have documentation
-#source $SCRIPT_DIR/env.sh
-#source $SCRIPT_DIR/checkout.sh
-
+# Get deployment Configs for all apps from openshift
 mkdir deployment_configs
 
 token=`oc whoami -t`
@@ -15,6 +8,7 @@ curl -H "Authorization: Bearer $token" -k -L -o deployment_configs/deploymentCon
 
 groovy json2yml.groovy
 
+# Create all files required for mkdocs
 python3 create-files.py
 
 # remove any existing stylesheets
