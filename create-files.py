@@ -203,7 +203,7 @@ def writeFileToGuide(guidePath, filetoWrite, header):
     guideFile.write(header + "```\n")
 
     for line in open(filetoWrite, 'r'):
-        guidePath.write(line)
+        guideFile.write(line)
 
     guideFile.write("```\n")
     guideFile.close()
