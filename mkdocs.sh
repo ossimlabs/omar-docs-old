@@ -1,12 +1,12 @@
 #! /bin/bash
 
 # Get deployment Configs for all apps from openshift
-mkdir deployment_configs
+#mkdir deployment_configs
 
-token=`oc whoami -t`
-curl -H "Authorization: Bearer $token" -k -L -o deployment_configs/deploymentConfigs.json https://openshift.ossim.io:8443/oapi/v1/namespaces/omar-dev/deploymentconfigs
+#token=`oc whoami -t`
+#curl -H "Authorization: Bearer $token" -k -L -o deployment_configs/deploymentConfigs.json https://openshift.ossim.io:8443/oapi/v1/namespaces/omar-dev/deploymentconfigs
 
-groovy json2yml.groovy
+#groovy json2yml.groovy
 
 # Create all files required for mkdocs
 python3 create-files.py

@@ -1,6 +1,7 @@
 import yaml
 import os
 import subprocess
+import json
 
 def createCustomPaths(docVars):
     os.chdir("docs")
@@ -191,8 +192,30 @@ def addRepoNames(docVars):
 
     for app in docVars["apps"]:
         docVars["repos"].append(GIT_PUBLIC_SERVER_URL + "/" + app + ".git")
-    
+
+def createDeployConfigs():
+    os.mkdir("deployment_configs")
+
+    token = subprocess.getoutput("oc whoami -t")
+    os.system("curl -H 'Authorization: Bearer {}' -k -L -o deployment_configs/deploymentConfigs.json {}/oapi/v1/namespaces/omar-dev/deploymentconfigs".format(token, os.environ["OPENSHIFT_URL"]))
+
+    convertJsontoYaml("deployment_configs/deploymentConfigs.json")
+
+def convertJsontoYaml(jsonFile):
+    jsonIn = json.load(open(jsonFile, 'r'))
+
+    for config in jsonIn["items"]:
+        newConfig = { "apiVersion": jsonIn["apiVersion"], "kind": jsonIn["kind"] }
+        newConfig.update(config)
+
+        yamlOut = yaml.dump(newConfig)
+
+        open("deployment_configs/{}.yml".format(config["metadata"]["name"]), "w+").write(yamlOut)
+
 def main():
+    # Create OpenShift DeployConfig Files
+    createDeployConfigs()
+
     # Load variables and clone all repos
     docVars = yaml.load(open("docVars.yml", 'r'), Loader=yaml.FullLoader)
     addRepoNames(docVars)
