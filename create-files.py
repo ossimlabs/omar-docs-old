@@ -218,7 +218,6 @@ def buildMkdocs():
     os.system("find . ! -name 'table.js' -name '*.js' -type f -delete")
 
     os.system("mkdocs build")
-    #os.system("sed -i -e 's/content='None'/content='Complete installation and user guides for the suite of O2 services.'/g' ./site/index.html")
 
 def main():
     # Create OpenShift DeployConfig Files

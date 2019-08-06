@@ -38,7 +38,7 @@ node( "${ BUILD_NODE }" ) {
         ]]) {
             sh """
                 oc login $OPENSHIFT_URL -u $OPENSHIFT_USERNAME -p $OPENSHIFT_PASSWORD
-                ./mkdocs.sh
+                python3 create-files.py
                 tar cfz docs.tgz site
             """
         }
