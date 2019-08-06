@@ -96,8 +96,8 @@ def dockerFiles(docVars, customPaths):
 
     for app in docVars["apps"]:
 
-        if app in customPaths and "dockerGuide" in customPaths[app]:
-            DOCKERFILE = app + "/" + str(customPaths[app]["dockerGuide"])
+        if app in customPaths and "dockerFile" in customPaths[app]:
+            DOCKERFILE = app + "/" + str(customPaths[app]["dockerFile"])
         elif os.path.exists(app + "/docker/Dockerfile"):
             DOCKERFILE = app + "/docker/Dockerfile"
         else:
