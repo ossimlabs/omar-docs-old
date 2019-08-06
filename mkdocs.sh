@@ -25,4 +25,4 @@ find . ! -name "table.js" -name "*.js" -type f -delete
 
 mkdocs build
 
-sed -i -e 's/content="None"/content="Complete installation and user guides for the suite of O2 services."/g' $SCRIPT_DIR/site/index.html
+sed -i -e 's/content="None"/content="Complete installation and user guides for the suite of O2 services."/g' ./site/index.html
