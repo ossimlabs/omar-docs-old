@@ -194,7 +194,8 @@ def addRepoNames(docVars):
         docVars["repos"].append(GIT_PUBLIC_SERVER_URL + "/" + app + ".git")
 
 def createDeployConfigs():
-    os.mkdir("deployment_configs")
+    if not os.path.exists("deployment_configs"):
+        os.mkdir("deployment_configs")
 
     token = subprocess.getoutput("oc whoami -t")
     os.system("curl -H 'Authorization: Bearer {}' -k -L -o deployment_configs/deploymentConfigs.json {}/oapi/v1/namespaces/omar-dev/deploymentconfigs".format(token, os.environ["OPENSHIFT_URL"]))
