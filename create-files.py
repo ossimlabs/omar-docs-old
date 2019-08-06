@@ -14,6 +14,15 @@ def createCustomPaths(docVars):
     os.chdir("..")
     return customPaths
 
+def checkoutRepos(docVars):
+    os.chdir("docs")
+
+    for repo in docVars["repos"]:
+        cloneCommand = "git clone --depth=1 {}".format(repo)
+        os.system(cloneCommand)
+
+    os.chdir("..")
+
 def homePage(docVars, customPaths):
     os.chdir("docs")
 
@@ -45,7 +54,7 @@ def homePage(docVars, customPaths):
                 indexFile.write("| Description not available. |\n")
     indexFile.close()
     os.chdir("..")
-		
+
 def applicationFiles(docVars, customPaths):
     os.chdir("docs")
 
@@ -145,7 +154,6 @@ def mkdocsYML(docVars, customPaths):
                 mkdocsFile.write("  - {}: {}\n".format(app, GUIDE))
     mkdocsFile.close()
 
-
 def findDescriptionLine(README_PATH):
     README = open(README_PATH, 'r')
     CHECK_NEXT = False
@@ -164,7 +172,6 @@ def findDescriptionLine(README_PATH):
     return None
 
 def getGuideFile(app, customPaths, guide):
-
     if app in customPaths and guide in customPaths[app]:
         GUIDE = app + "/" + str(customPaths[app][guide])
     else:
@@ -184,11 +191,24 @@ def writeFileToGuide(GUIDE, filetoWrite):
         guideFile.write("```\n")
 
         guideFile.close()
+
+def addRepoNames(docVars):
+    docVars["repos"] = list()
+    GIT_PUBLIC_SERVER_URL = os.environ["GIT_PUBLIC_SERVER_URL"]
+
+    for app in docVars["apps"]:
+        docVars["repos"].append(GIT_PUBLIC_SERVER_URL + "/" + app + ".git")
     
 def main():
+    # Load variables and clone all repos
     docVars = yaml.load(open("docVars.yml", 'r'), Loader=yaml.FullLoader)
+    addRepoNames(docVars)
+    checkoutRepos(docVars)
+
+    # Create any custom paths for app config files that don't follow the defaults
     customPaths = createCustomPaths(docVars)
 
+    # Create all mkdocs documents
     homePage(docVars, customPaths)
     applicationFiles(docVars, customPaths)
     deploymentConfig(docVars, customPaths)

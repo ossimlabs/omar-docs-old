@@ -37,7 +37,7 @@ node( "${ BUILD_NODE }" ) {
             passwordVariable: 'OPENSHIFT_PASSWORD'
         ]]) {
             sh """
-                oc login https://openshift.ossim.io:8443 -u $OPENSHIFT_USERNAME -p $OPENSHIFT_PASSWORD
+                oc login $OPENSHIFT_URL -u $OPENSHIFT_USERNAME -p $OPENSHIFT_PASSWORD
                 ./mkdocs.sh
                 tar cfz docs.tgz site
             """
