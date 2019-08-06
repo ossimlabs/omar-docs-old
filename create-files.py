@@ -1,10 +1,10 @@
 import yaml
-import logging
 import os
 import subprocess
 
-def createCustomPaths(docVars, customPaths):
+def createCustomPaths(docVars):
     os.chdir("docs")
+    customPaths = dict()
 
     for app in docVars["apps"]:
         docsConfigFile = app + "/docsConfig.yml"
@@ -12,6 +12,7 @@ def createCustomPaths(docVars, customPaths):
             customPaths[app] = yaml.load(open(docsConfigFile, 'r'), Loader=yaml.FullLoader)
     
     os.chdir("..")
+    return customPaths
 
 def homePage(docVars, customPaths):
     os.chdir("docs")
@@ -29,7 +30,7 @@ def homePage(docVars, customPaths):
             
             if os.path.exists(GUIDE):
                 LINK = GUIDE.split(".")[0]
-                logging.info("Found {}...".format(GUIDE))
+                print("Found {}...".format(GUIDE))
                 indexFile.write("[{}]({}/)".format(guide, LINK))
         
         indexFile.write("|  |\n")
@@ -40,7 +41,7 @@ def homePage(docVars, customPaths):
             if appDescription:
                 indexFile.write("| " + appDescription + " |\n")
             else:
-                logging.info("Description not found in README.")
+                print("Description not found in README.")
                 indexFile.write("| Description not available. |\n")
     indexFile.close()
     os.chdir("..")
@@ -147,7 +148,6 @@ def mkdocsYML(docVars, customPaths):
 
 def findDescriptionLine(README_PATH):
     README = open(README_PATH, 'r')
-
     CHECK_NEXT = False
 
     for line in README:
@@ -164,12 +164,8 @@ def findDescriptionLine(README_PATH):
     return None
 
 def getGuideFile(app, customPaths, guide):
-    if app in customPaths:
-        USE_DEFAULT = False
-    else:
-        USE_DEFAULT = True
 
-    if not USE_DEFAULT and guide in customPaths[app]:
+    if app in customPaths and guide in customPaths[app]:
         GUIDE = app + "/" + str(customPaths[app][guide])
     else:
         GUIDE = app + "/docs/" + guide + "/" + app + ".md"
@@ -177,7 +173,8 @@ def getGuideFile(app, customPaths, guide):
     return GUIDE
 
 def writeFileToGuide(GUIDE, filetoWrite):
-    print(filetoWrite)
+    print("Writing {} to {}".format(filetoWrite, GUIDE))
+
     if os.path.exists(GUIDE):
         guideFile = open(GUIDE, 'a')
 
@@ -189,11 +186,9 @@ def writeFileToGuide(GUIDE, filetoWrite):
         guideFile.close()
     
 def main():
-    varFile = open("docVars.yml", 'r')
-    docVars = yaml.load(varFile, Loader=yaml.FullLoader)
-    customPaths = dict()
+    docVars = yaml.load(open("docVars.yml", 'r'), Loader=yaml.FullLoader)
+    customPaths = createCustomPaths(docVars)
 
-    createCustomPaths(docVars, customPaths)
     homePage(docVars, customPaths)
     applicationFiles(docVars, customPaths)
     deploymentConfig(docVars, customPaths)
