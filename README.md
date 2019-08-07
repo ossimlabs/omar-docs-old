@@ -10,15 +10,15 @@ To add an application to the omar-docs app simply add the name of the applicatio
 
 ## Using Custom Paths for Doc Files
 By default, omar-docs will look in the following locations for documentation files in each application repository:
-    * application.yml - Will search the whole repository and inject the first one found
-    * Dockerfile - Will look under both `docker/Dockerfile` and `Dockerfile` and inject the file if one is found
-    * deploymentConfig - By default this file will NOT be included in an apps documentation unless it is specficied with custom variables seen below.
-    * install-guide - Will look under `docs/install-guide/{app}.md`. If this file does not exist, no other files will be injected into omar-docs
-    * user-guide - Will look under `docs/user-guide/{app}.md`. This file is not required for all apps,
+- application.yml - Will search the whole repository and inject the first one found
+- Dockerfile - Will look under both `docker/Dockerfile` and `Dockerfile` and inject the file if one is found
+- deploymentConfig - By default this file will NOT be included in an apps documentation unless it is specficied with custom variables seen below.
+- install-guide - Will look under `docs/install-guide/{app}.md`. If this file does not exist, no other files will be injected into omar-docs
+- user-guide - Will look under `docs/user-guide/{app}.md`. This file is not required for all apps,
 
 If one would like omar-docs to look at other path names within the app's repository to find the above files, one may put a `docsConfig.yml` file in the root directory of their app's repository. The following variables are supported:
-    * applicationFile: `{custom/path/to/application.yml}`
-    * dockerFile: `{custom/path/to/Dockerfile}`
-    * displayDeployConf: `True` if you want the app's deployConfig template to be public, `False` or leave blank otherwise
-    * install-guide: `{custom/path/to/install-guide}`
-    * user-guide: `{custom/path/to/user-guide}`
+- applicationFile: `{custom/path/to/application.yml}`
+- dockerFile: `{custom/path/to/Dockerfile}`
+- displayDeployConf: `True` if you want the app's deployConfig template to be public, `False` or leave blank otherwise
+- install-guide: `{custom/path/to/install-guide}`
+- user-guide: `{custom/path/to/user-guide}`
