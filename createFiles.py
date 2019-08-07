@@ -3,7 +3,7 @@ import os
 import subprocess
 import json
 
-def createDeployConfigs():
+def getDeployConfigs():
     if not os.path.exists("deployment_configs"):
         os.mkdir("deployment_configs")
 
@@ -14,29 +14,21 @@ def createDeployConfigs():
     convertJsontoYaml("deployment_configs/deploymentConfigs.json")
 
 def checkoutRepos(docVars):
-    os.chdir("docs")
-
     for repo in docVars["repos"]:
         cloneCommand = "git clone --depth=1 {}".format(repo)
         os.system(cloneCommand)
 
-    os.chdir("..")
-
 def createCustomPaths(docVars):
-    os.chdir("docs")
     customPaths = dict()
 
     for app in docVars["apps"]:
         docsConfigFile = app + "/docsConfig.yml"
         if os.path.exists(docsConfigFile):
             customPaths[app] = yaml.load(open(docsConfigFile, 'r'), Loader=yaml.FullLoader)
-    
-    os.chdir("..")
+
     return customPaths
 
 def homePage(docVars, customPaths):
-    os.chdir("docs")
-
     indexFile = open("index.md", 'a')
     indexFile.write("| | | | | |\n|-|-|-|-|-|\n")
     
@@ -54,10 +46,10 @@ def homePage(docVars, customPaths):
                 indexFile.write("[{}]({}/)".format(guideName, LINK))
         
         indexFile.write("|  |\n")
-        README_PATH = app + "/README.md"
+        readmePath = app + "/README.md"
 
-        if os.path.exists(README_PATH):
-            appDescription = findDescriptionLine(README_PATH)
+        if os.path.exists(readmePath):
+            appDescription = findDescriptionLine(readmePath)
             if appDescription:
                 indexFile.write("| " + appDescription + " |\n")
             else:
@@ -67,80 +59,51 @@ def homePage(docVars, customPaths):
             indexFile.write("| Description not available. |\n")
 
     indexFile.close()
-    os.chdir("..")
 
-def applicationFiles(docVars, customPaths):
-    os.chdir("docs")
-
+def createInstallGuides(docVars, customPaths):
     for app in docVars["apps"]:
-        if app == "o2-pushbutton":
-            continue
-
-        if app in customPaths and "applicationFile" in customPaths[app]:
-            CONFIG_FILE = "{}/{}".format(app, str(customPaths[app]["applicationFile"]))
-        else:
-            CONFIG_FILE = subprocess.getoutput("find {} -name 'application.yml' | head -1".format(app))
-
         guidePath = getGuidePath(app, customPaths, "install-guide")
+        injectAppFile(app, customPaths, guidePath)
+        if customPaths.get(app).get("displayDeployConf"):
+            injectDeployConf(app, customPaths, guidePath)
+        injectDockerFile(app, customPaths, guidePath)
+        injectSourceCode(app, customPaths, guidePath)
 
-        if os.path.exists(guidePath) and os.path.exists(CONFIG_FILE):
-            writeFileToGuide(guidePath, CONFIG_FILE, "\n\n## Application YML Configuration\n")
+def injectAppFile(app, customPaths, guidePath):
+    if app in customPaths and "applicationFile" in customPaths[app]:
+        CONFIG_FILE = "{}/{}".format(app, str(customPaths[app]["applicationFile"]))
+    else:
+        CONFIG_FILE = subprocess.getoutput("find {} -name 'application.yml' | head -1".format(app))
 
-    os.chdir("..")
+    if os.path.exists(guidePath) and os.path.exists(CONFIG_FILE):
+        embedFileInGuide(guidePath, CONFIG_FILE, "\n\n## Application YML Configuration\n")
 
-def deploymentConfig(docVars, customPaths):
-    os.chdir("docs")
+def injectDeployConf(app, customPaths, guidePath):
+    all_configs = os.listdir("../deployment_configs")
 
-    for app in docVars["apps"]:
+    for config in all_configs:
+        if app in config:
+            CONFIG_PATH = "../deployment_configs/" + config
+            if os.path.exists(guidePath) and os.path.exists(CONFIG_PATH):
+                embedFileInGuide(guidePath, CONFIG_PATH, "\n## Example OpenShift Deployment Config\n")
 
-        if app == "omar-base" or app == "omar-config-server" or app == "omar-volume-cleanup":
-            continue
+def injectDockerFile(app, customPaths, guidePath):
+    if app in customPaths and "dockerFile" in customPaths[app]:
+        dockerPath = "{}/{}".format(app, str(customPaths[app]["dockerFile"]))
+    elif os.path.exists(app + "/docker/Dockerfile"):
+        dockerPath = "{}/docker/Dockerfile".format(app)
+    else:
+        dockerPath = "{}/Dockerfile".format(app)
 
-        guidePath = getGuidePath(app, customPaths, "install-guide")
+    if os.path.exists(guidePath) and os.path.exists(dockerPath):
+        embedFileInGuide(guidePath, dockerPath, "\n## Dockerfile\n")
 
-        all_configs = os.listdir("../deployment_configs")
-
-        for config in all_configs:
-            if app in config:
-                CONFIG_PATH = "../deployment_configs/" + config
-                if os.path.exists(guidePath) and os.path.exists(CONFIG_PATH):
-                    writeFileToGuide(guidePath, CONFIG_PATH, "\n## Example OpenShift Deployment Config\n")
-
-    os.chdir("..")
-
-def dockerFiles(docVars, customPaths):
-    os.chdir("docs")
-
-    for app in docVars["apps"]:
-
-        if app in customPaths and "dockerFile" in customPaths[app]:
-            DOCKERFILE = "{}/{}".format(app, str(customPaths[app]["dockerFile"]))
-        elif os.path.exists(app + "/docker/Dockerfile"):
-            DOCKERFILE = "{}/docker/Dockerfile".format(app)
-        else:
-            DOCKERFILE = "{}/Dockerfile".format(app)
-
-        guidePath = getGuidePath(app, customPaths, "install-guide")
-
-        if os.path.exists(guidePath) and os.path.exists(DOCKERFILE):
-            writeFileToGuide(guidePath, DOCKERFILE, "\n## Dockerfile\n")
-
-    os.chdir("..")
-
-def sourceCode(docVars, customPaths):
-    os.chdir("docs")
-
-    for app in docVars["apps"]:
-
-        guidePath = getGuidePath(app, customPaths, "install-guide")
-
-        if os.path.exists(guidePath):
-            guideStream = open(guidePath, 'a')
-            guideStream.write("\n## Source Code\n")
-            gitUrl = "https://github.com/ossimlabs/{}.git".format(app)
-            guideStream.write("[{0}]({0})\n".format(gitUrl))
-
-    os.chdir("..")
+def injectSourceCode(app, customPaths, guidePath):
+    if os.path.exists(guidePath):
+        guideStream = open(guidePath, 'a')
+        guideStream.write("\n## Source Code\n")
+        gitUrl = "https://github.com/ossimlabs/{}.git".format(app)
+        guideStream.write("[{0}]({0})\n".format(gitUrl))
 
 def mkdocsYML(docVars, customPaths):
     mkdocsFile = open("mkdocs.yml", "w+")
@@ -171,11 +134,11 @@ def addRepoNames(docVars):
     for app in docVars["apps"]:
         docVars["repos"].append("{}/{}.git".format(GIT_PUBLIC_SERVER_URL, app))
 
-def findDescriptionLine(README_PATH):
-    README = open(README_PATH, 'r')
+def findDescriptionLine(readmePath):
+    readmeFile = open(readmePath, 'r')
     CHECK_NEXT = False
 
-    for line in README:
+    for line in readmeFile:
         if not line.strip():
             continue
 
@@ -196,16 +159,15 @@ def getGuidePath(app, customPaths, guideName):
 
     return guidePath
 
-def writeFileToGuide(guidePath, filetoWrite, header):
+def embedFileInGuide(guidePath, filetoWrite, header):
     print("Writing {} to {}".format(filetoWrite, guidePath))
 
     guideFile = open(guidePath, 'a')
+
     guideFile.write(header + "```\n")
-
-    for line in open(filetoWrite, 'r'):
-        guideFile.write(line)
-
+    guideFile.write(open(filetoWrite, 'r').read())
     guideFile.write("```\n")
+
     guideFile.close()
 
 def convertJsontoYaml(jsonFile):
@@ -221,9 +183,10 @@ def convertJsontoYaml(jsonFile):
 
 def main():
     # Create OpenShift DeployConfig Files
-    createDeployConfigs()
+    getDeployConfigs()
 
     # Load variables and clone all repos
+    os.chdir("docs")
     docVars = yaml.load(open("docVars.yml", 'r'), Loader=yaml.FullLoader)
     addRepoNames(docVars)
     checkoutRepos(docVars)
@@ -233,10 +196,8 @@ def main():
 
     # Create all mkdocs documents
     homePage(docVars, customPaths)
-    applicationFiles(docVars, customPaths)
-    deploymentConfig(docVars, customPaths)
-    dockerFiles(docVars, customPaths)
-    sourceCode(docVars, customPaths)
+    createInstallGuides(docVars, customPaths)
+    os.chdir("..")
     mkdocsYML(docVars, customPaths)
 
     # Build the mkdocs site
