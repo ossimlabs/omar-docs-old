@@ -13,6 +13,13 @@ def getDeployConfigs():
 
     convertJsontoYaml("deployment_configs/deploymentConfigs.json")
 
+def addRepoNames(docVars):
+    docVars["repos"] = list()
+    GIT_PUBLIC_SERVER_URL = os.environ["GIT_PUBLIC_SERVER_URL"]
+
+    for app in docVars["apps"]:
+        docVars["repos"].append("{}/{}.git".format(GIT_PUBLIC_SERVER_URL, app))
+
 def checkoutRepos(docVars):
     for repo in docVars["repos"]:
         cloneCommand = "git clone --depth=1 {}".format(repo)
@@ -71,21 +78,21 @@ def createInstallGuides(docVars, customPaths):
 
 def injectAppFile(app, customPaths, guidePath):
     if app in customPaths and "applicationFile" in customPaths[app]:
-        CONFIG_FILE = "{}/{}".format(app, str(customPaths[app]["applicationFile"]))
+        configPath = "{}/{}".format(app, str(customPaths[app]["applicationFile"]))
     else:
-        CONFIG_FILE = subprocess.getoutput("find {} -name 'application.yml' | head -1".format(app))
+        configPath = subprocess.getoutput("find {} -name 'application.yml' | head -1".format(app))
 
-    if os.path.exists(guidePath) and os.path.exists(CONFIG_FILE):
-        embedFileInGuide(guidePath, CONFIG_FILE, "\n\n## Application YML Configuration\n")
+    if os.path.exists(guidePath) and os.path.exists(configPath):
+        embedFileInGuide(guidePath, configPath, "\n\n## Application YML Configuration\n")
 
 def injectDeployConf(app, customPaths, guidePath):
     all_configs = os.listdir("../deployment_configs")
 
     for config in all_configs:
         if app in config:
-            CONFIG_PATH = "../deployment_configs/" + config
-            if os.path.exists(guidePath) and os.path.exists(CONFIG_PATH):
-                embedFileInGuide(guidePath, CONFIG_PATH, "\n## Example OpenShift Deployment Config\n")
+            configPath = "../deployment_configs/" + config
+            if os.path.exists(guidePath) and os.path.exists(configPath):
+                embedFileInGuide(guidePath, configPath, "\n## Example OpenShift Deployment Config\n")
 
 def injectDockerFile(app, customPaths, guidePath):
     if app in customPaths and "dockerFile" in customPaths[app]:
@@ -126,13 +133,6 @@ def buildMkdocs():
     os.system("find . -name '*.css' -type f -delete")
     os.system("find . ! -name 'table.js' -name '*.js' -type f -delete")
     os.system("mkdocs build")
-
-def addRepoNames(docVars):
-    docVars["repos"] = list()
-    GIT_PUBLIC_SERVER_URL = os.environ["GIT_PUBLIC_SERVER_URL"]
-
-    for app in docVars["apps"]:
-        docVars["repos"].append("{}/{}.git".format(GIT_PUBLIC_SERVER_URL, app))
 
 def findDescriptionLine(readmePath):
     readmeFile = open(readmePath, 'r')
