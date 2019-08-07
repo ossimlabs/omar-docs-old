@@ -186,8 +186,8 @@ def main():
     getDeployConfigs()
 
     # Load variables and clone all repos
-    os.chdir("docs")
     docVars = yaml.load(open("docVars.yml", 'r'), Loader=yaml.FullLoader)
+    os.chdir("docs")
     addRepoNames(docVars)
     checkoutRepos(docVars)
 
