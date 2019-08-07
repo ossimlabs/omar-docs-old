@@ -4,7 +4,6 @@ guides:
   - user-guide
 
 apps:
-  - o2-pushbutton
   - omar-admin-server
   - omar-avro-metadata
   - omar-base

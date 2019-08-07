@@ -64,7 +64,7 @@ def createInstallGuides(docVars, customPaths):
     for app in docVars["apps"]:
         guidePath = getGuidePath(app, customPaths, "install-guide")
         injectAppFile(app, customPaths, guidePath)
-        if customPaths.get(app).get("displayDeployConf"):
+        if app in customPaths and customPaths[app].get("displayDeployConf"):
             injectDeployConf(app, customPaths, guidePath)
         injectDockerFile(app, customPaths, guidePath)
         injectSourceCode(app, customPaths, guidePath)
