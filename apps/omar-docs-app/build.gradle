@@ -6,7 +6,7 @@ buildscript {
     }
     dependencies {
         classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.7.5"
-        classpath 'io.ossim:gradleDefaults:1.7-SNAPSHOT'
+        classpath 'io.ossim:gradleDefaults:1.8-RELEASE'
     }
 }
 
