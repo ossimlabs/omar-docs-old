@@ -54,7 +54,7 @@ node( "${ BUILD_NODE }" ) {
         ]]) {
             sh """
                 mv docs.tgz ./docker
-                gradle pushDockerImage -PossimMavenProxy=${OSSIM_MAVEN_PROXY}
+                gradle pushDockerImage -PossimMavenProxy=${MAVEN_DOWNLOAD_URL}
             """
         }
     }
@@ -68,7 +68,7 @@ node( "${ BUILD_NODE }" ) {
                 passwordVariable: 'OPENSHIFT_PASSWORD'
             ]]) {
                 sh """
-                    gradle openshiftTagImage -PossimMavenProxy=${OSSIM_MAVEN_PROXY}
+                    gradle openshiftTagImage -PossimMavenProxy=${MAVEN_DOWNLOAD_URL}
                 """
             }
         }
