@@ -64,19 +64,22 @@ podTemplate(
           archiveArtifacts "apps/*/build/libs/*.jar"
         }
       }
-    stage ("Publish Nexus"){	
-      container('builder'){
-          withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                          credentialsId: 'nexusCredentials',
-                          usernameVariable: 'MAVEN_REPO_USERNAME',
-                          passwordVariable: 'MAVEN_REPO_PASSWORD']])
-          {
-            sh """
-            ./gradlew publish \
-                -PossimMavenProxy=${MAVEN_DOWNLOAD_URL}
-            """
+      stage ( "Assemble" ) {
+        container('builder'){
+          withCredentials([[
+              $class: 'UsernamePasswordMultiBinding',
+              credentialsId: 'openshiftCredentials',
+              usernameVariable: 'OPENSHIFT_USERNAME',
+              passwordVariable: 'OPENSHIFT_PASSWORD'
+          ]]) {
+              sh """
+                  oc login $OPENSHIFT_URL -u $OPENSHIFT_USERNAME -p $OPENSHIFT_PASSWORD
+                  python3 createFiles.py
+                  tar cfz docs.tgz site
+              """
           }
-        }
+          archiveArtifacts "docs.tgz"
+      }
     }
     stage('Docker build') {
       container('docker') {
