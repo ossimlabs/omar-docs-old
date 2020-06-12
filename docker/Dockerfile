@@ -1,5 +1,5 @@
 ARG BASE_IMAGE
-FROM ${BASE_IMAGE}
+FROM nexus-docker-public-hosted.ossim.io/${BASE_IMAGE}
 ENV HOME=/home/omar
 USER root
 RUN mkdir -p $HOME
